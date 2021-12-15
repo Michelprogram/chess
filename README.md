@@ -12,3 +12,5 @@ Un pion peut faire les mouvements de plusieurs pion combiner, Dame Tour + chevau
 
 - Le pattern d'observation
 Informe tous les pions des positions des autres pion
+
+https://online.visual-paradigm.com/share.jsp?id=313630343532332d31
