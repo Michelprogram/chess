@@ -1,37 +1,29 @@
 package chess.piece;
 
-import chess.piece.pion.Fou;
+import chess.piece.pions.*;
 
 public class FactoryPiece {
 
-    static Piece blanche( String nomPion){
+    public FactoryPiece(){}
 
-        switch (nomPion){
-
-            case ("Fou"):
-                break;
-
-            case ("Cavalier"):
-                break;
-
-            case("Pion"):
-                break;
-
-            case("Reine"):
-                break;
-
-            case("Tour"):
-                break;
-
-            case ("Roi"):
-                break;
-        }
+    public Piece blanche( String nomPion){
+        return switch (nomPion) {
+            case ("Fou") -> new Fou();
+            case ("Cavalier") -> new Cavalier();
+            case ("Pion") -> new Pion();
+            case ("Reine") -> new Reine();
+            case ("Tour") -> new Tour();
+            case ("Roi") -> new Roi();
+            default -> null;
+        };
 
     }
 
+    /*
     static Piece noire( String nomPion){
         return new Fou(true);
     }
+     */
 
 
 }

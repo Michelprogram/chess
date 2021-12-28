@@ -12,8 +12,14 @@ public abstract class Piece {
     private Boolean couleur;
     private Boolean menace;
 
+    /*
     public Piece(Boolean couleur) {
         this.couleur = couleur;
+    }
+     */
+
+    public Piece(){
+
     }
 
     public char getCharacter() {
