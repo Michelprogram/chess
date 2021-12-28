@@ -1,7 +1,9 @@
+import chess.piece.Piece;
+
 import java.util.Map;
 
 public class Affichage implements Observateur{
-    private Map<Case,Piece> cases;
+    private Map<Case, Piece> cases;
     private Plateau plateau;
 
     public Affichage(Plateau plateau){
