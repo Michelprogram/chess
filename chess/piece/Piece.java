@@ -1,6 +1,8 @@
 package chess.piece;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public abstract class Piece {
 
@@ -66,6 +68,14 @@ public abstract class Piece {
         this.positionLetter = positionLetter;
     }
 
+    public Integer getAbscisse(){
+        return this.getPositionNumber()[1];
+    }
+
+    public Integer getOrdonnee(){
+        return this.getPositionNumber()[0];
+    }
+
     public Boolean getCouleur() {
         return couleur;
     }
@@ -82,12 +92,24 @@ public abstract class Piece {
         this.menace = menace;
     }
 
+    protected ArrayList<Integer[]> zoneDeDeplacement(){
+        return null;
+    }
+
+    protected ArrayList<Integer[]> filterDeplacement(ArrayList<Integer[]> zone){
+        return (ArrayList<Integer[]>) zone.stream()
+                .filter( el -> (el[0] >= 0 && el[0] <= 8) && (el[1] >= 0 && el[1] <=8) )
+                .collect(Collectors.toList());
+    }
+
     @Override
     public String toString() {
         return "Je suis un(e) " + this.getClass().getSimpleName() +
                 " symbolisé par " + character +
                 " à la position " + Arrays.toString(positionNumber) +
                 " et aussi " + Arrays.toString(positionLetter) +
+                " d'abscisse " + getAbscisse() +
+                " et d'ordonnée " + getOrdonnee()+
                 " de couleur " + (couleur ? "blanche" : "noire") +
                 " menacé " + (menace ? "oui": "non");
 
