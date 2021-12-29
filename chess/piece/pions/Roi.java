@@ -27,6 +27,7 @@ public class Roi extends Piece {
                 tempo[0] = position[0] + i;
                 tempo[1] = position[1] + j;
 
+                //Evite de jouer sur la même case
                 if (!Arrays.equals(tempo,getPositionNumber())){
                     zone.add(Arrays.copyOf(tempo, 2));
                 }

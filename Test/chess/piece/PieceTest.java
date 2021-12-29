@@ -93,4 +93,48 @@ class PieceTest {
         }
 
     }
+
+    @Test
+    public void deplacementFou() throws Exception{
+
+        ArrayList<Integer[]> attendu = new ArrayList<>(){
+            {
+                add(new Integer[]{0,0});
+                add(new Integer[]{0,6});
+
+                add(new Integer[]{1,1});
+                add(new Integer[]{1,5});
+
+                add(new Integer[]{2,2});
+                add(new Integer[]{2,4});
+
+                add(new Integer[]{4,4});
+                add(new Integer[]{4,2});
+
+                add(new Integer[]{5,5});
+                add(new Integer[]{5,1});
+
+                add(new Integer[]{6,6});
+                add(new Integer[]{6,0});
+
+                add(new Integer[]{7,7});
+
+                add(new Integer[]{8,8});
+            }
+        };
+
+        Piece fou = factory.blanche("Fou");
+
+        fou.setPositionNumber(new Integer[]{3 , 3});
+
+        ArrayList<Integer[]> zone = fou.zoneDeDeplacement();
+
+        for (int i = 0; i < attendu.size(); i++) {
+            Integer[] tab1 = attendu.get(i);
+            Integer[] tab2 = zone.get(i);
+
+            assertArrayEquals(tab1, tab2);
+        }
+
+    }
 }

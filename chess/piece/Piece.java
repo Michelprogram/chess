@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+//TODO mettre en attriut zone
 public abstract class Piece {
 
     private char character;
