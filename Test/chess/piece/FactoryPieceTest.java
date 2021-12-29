@@ -11,16 +11,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /*
 @Test
-public void InstanceOf() throws Exception{
-    assertTrue(factoryPiece.blanche("Roi") instanceof Piece);
-    assertFalse(factoryPiece.blanche("Roi") instanceof Reine);
+public void Test() throws Exception{
+    assertTrue();
+    assertFalse(;
 }
 
  */
 
 class FactoryPieceTest{
 
-    private FactoryPiece factoryPiece = new FactoryPiece();
+    private final FactoryPiece factoryPiece = new FactoryPiece();
 
     @Test
     public void InstanceOf() throws Exception{
@@ -187,4 +187,33 @@ class FactoryPieceTest{
 
     }
 
+    @Test
+    public void affichagePiece(){
+        int nbPion = 8;
+        int nbPionIntermediaire = 3;
+
+        for (int i = 0; i < nbPion; i++) {
+            factoryPiece.blanche("Pion");
+        }
+
+        for (int i = 0; i < nbPionIntermediaire; i++) {
+            if(i == 0){
+                factoryPiece.blanche("Tour");
+                factoryPiece.blanche("Tour");
+            }
+            else if(i == 1){
+                factoryPiece.blanche("Cavalier");
+                factoryPiece.blanche("Cavalier");
+            }
+            else{
+                factoryPiece.blanche("Fou");
+                factoryPiece.blanche("Fou");
+            }
+        }
+
+        factoryPiece.blanche("Roi");
+        factoryPiece.blanche("Reine");
+
+        FactoryPiece.whitePieces.forEach(System.out::println);
+    }
 }

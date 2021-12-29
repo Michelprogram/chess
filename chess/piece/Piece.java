@@ -7,7 +7,7 @@ public abstract class Piece {
     private char character;
 
     private Integer[] positionNumber;
-    private Integer[] positionLetter;
+    private String[] positionLetter;
 
     private Boolean couleur;
     private Boolean menace;
@@ -20,16 +20,25 @@ public abstract class Piece {
 
         this.positionNumber = positionNumber;
 
+        this.menace = false;
+
+        numberToLetter();
+
     }
 
-    Integer[] numberToLetter(Integer[] positionNumber){
+    protected void numberToLetter(){
 
-        return null;
+        //97 -> a dans la table ASCII
+        final int asciiChar = 97 + this.positionNumber[1];
+
+        String[] tab = {
+                Integer.toString(8 - this.positionNumber[0]),
+                String.valueOf( ((char) asciiChar))
+        };
+
+        setPositionLetter(tab);
     }
 
-    Integer[] letterToNumber(Integer[] positionLetter){
-        return null;
-    }
 
     public char getCharacter() {
         return character;
@@ -45,13 +54,15 @@ public abstract class Piece {
 
     public void setPositionNumber(Integer[] positionNumber) {
         this.positionNumber = positionNumber;
+
+        numberToLetter();
     }
 
-    public Integer[] getPositionLetter() {
+    public String[] getPositionLetter() {
         return positionLetter;
     }
 
-    public void setPositionLetter(Integer[] positionLetter) {
+    public void setPositionLetter(String[] positionLetter) {
         this.positionLetter = positionLetter;
     }
 
@@ -78,7 +89,7 @@ public abstract class Piece {
                 " à la position " + Arrays.toString(positionNumber) +
                 " et aussi " + Arrays.toString(positionLetter) +
                 " de couleur " + (couleur ? "blanche" : "noire") +
-                " menacé " ;
+                " menacé " + (menace ? "oui": "non");
 
     }
 
