@@ -30,11 +30,10 @@ class PieceTest {
     }
 
     @Test
-    public void deplaceMentRoi() throws Exception{
+    public void deplacementRoi() throws Exception{
         ArrayList<Integer[]> attendu = new ArrayList<>(){
             {
                 add(new Integer[]{0, 2});
-                add(new Integer[]{0, 3});
                 add(new Integer[]{0, 4});
                 add(new Integer[]{1, 2});
                 add(new Integer[]{1, 3});
@@ -51,9 +50,47 @@ class PieceTest {
             assertArrayEquals(tab1, tab2);
         }
 
-
-
-        //Assert entre les 2 tab
     }
 
+    @Test
+    public void deplacementTour() throws Exception{
+
+        ArrayList<Integer[]> attendu = new ArrayList<>(){
+                {
+                    //Axe horizontale
+                    add(new Integer[]{2, 0});
+                    add(new Integer[]{2, 2});
+                    add(new Integer[]{2, 3});
+                    add(new Integer[]{2, 4});
+                    add(new Integer[]{2, 5});
+                    add(new Integer[]{2, 6});
+                    add(new Integer[]{2, 7});
+                    add(new Integer[]{2, 8});
+
+                    //Axe verticale
+                    add(new Integer[]{0, 1});
+                    add(new Integer[]{1, 1});
+                    add(new Integer[]{3, 1});
+                    add(new Integer[]{4, 1});
+                    add(new Integer[]{5, 1});
+                    add(new Integer[]{6, 1});
+                    add(new Integer[]{7, 1});
+                    add(new Integer[]{8, 1});
+
+                }
+        };
+
+        Piece tour = factory.noire("Tour");
+        tour.setPositionNumber(new Integer[]{ 2, 1});
+
+        ArrayList<Integer[]> zone = tour.zoneDeDeplacement();
+
+        for (int i = 0; i < attendu.size(); i++) {
+            Integer[] tab1 = attendu.get(i);
+            Integer[] tab2 = zone.get(i);
+
+            assertArrayEquals(tab1, tab2);
+        }
+
+    }
 }

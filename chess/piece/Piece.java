@@ -96,9 +96,10 @@ public abstract class Piece {
         return null;
     }
 
+    //Après avoir trouvé les zones de déplacement ont nettoie toutes les cases qui sont en dehors du plateau
     protected ArrayList<Integer[]> filterDeplacement(ArrayList<Integer[]> zone){
         return (ArrayList<Integer[]>) zone.stream()
-                .filter( el -> (el[0] >= 0 && el[0] <= 8) && (el[1] >= 0 && el[1] <=8) )
+                .filter( el -> (el[0] >= 0 && el[0] <= 8) && (el[1] >= 0 && el[1] <= 8) )
                 .collect(Collectors.toList());
     }
 
@@ -113,6 +114,13 @@ public abstract class Piece {
                 " de couleur " + (couleur ? "blanche" : "noire") +
                 " menacé " + (menace ? "oui": "non");
 
+    }
+
+    public void stringTest(){
+
+        ArrayList<Integer[]> test = zoneDeDeplacement();
+
+         test.forEach(el -> System.out.println(Arrays.toString(el)));
     }
 
 

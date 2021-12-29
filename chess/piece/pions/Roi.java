@@ -27,7 +27,9 @@ public class Roi extends Piece {
                 tempo[0] = position[0] + i;
                 tempo[1] = position[1] + j;
 
-                zone.add(Arrays.copyOf(tempo, 2));
+                if (!Arrays.equals(tempo,getPositionNumber())){
+                    zone.add(Arrays.copyOf(tempo, 2));
+                }
             }
         }
 
