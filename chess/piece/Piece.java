@@ -12,14 +12,23 @@ public abstract class Piece {
     private Boolean couleur;
     private Boolean menace;
 
-    /*
-    public Piece(Boolean couleur) {
+
+    public Piece(Boolean couleur,char namePiece, Integer[] positionNumber) {
         this.couleur = couleur;
+
+        this.character = namePiece;
+
+        this.positionNumber = positionNumber;
+
     }
-     */
 
-    public Piece(){
+    Integer[] numberToLetter(Integer[] positionNumber){
 
+        return null;
+    }
+
+    Integer[] letterToNumber(Integer[] positionLetter){
+        return null;
     }
 
     public char getCharacter() {
@@ -64,13 +73,13 @@ public abstract class Piece {
 
     @Override
     public String toString() {
-        return "Piece{" +
-                "character=" + character +
-                ", positionNumber=" + Arrays.toString(positionNumber) +
-                ", positionLetter=" + Arrays.toString(positionLetter) +
-                ", couleur=" + couleur +
-                ", menace=" + menace +
-                '}';
+        return "Je suis un(e) " + this.getClass().getSimpleName() +
+                " symbolisé par " + character +
+                " à la position " + Arrays.toString(positionNumber) +
+                " et aussi " + Arrays.toString(positionLetter) +
+                " de couleur " + (couleur ? "blanche" : "noire") +
+                " menacé " ;
+
     }
 
 
