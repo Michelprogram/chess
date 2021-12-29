@@ -7,7 +7,8 @@ import java.util.Arrays;
 
 public class FactoryPiece {
 
-    private Boolean white, black;
+    private final Boolean white;
+    private final Boolean black;
 
     static ArrayList<Piece> whitePieces = new ArrayList<>();
     static ArrayList<Piece> blackPieces = new ArrayList<>();
@@ -34,6 +35,25 @@ public class FactoryPiece {
         whitePieces.add(p);
 
         return p;
+    }
+
+    public Piece noire( String nomPion){
+        Integer[] position = adjustPosition(black, nomPion);
+
+        Piece p = switch (nomPion) {
+            case ("Fou") -> new Fou(black, 'B', position);
+            case ("Cavalier") -> new Cavalier(black, 'K',position);
+            case ("Pion") -> new Pion(black, 'P', position);
+            case ("Reine") -> new Reine(black, 'Q', position);
+            case ("Tour") -> new Tour(black, 'R', position);
+            case ("Roi") -> new Roi(black, 'K', position);
+            default -> null;
+        };
+
+        blackPieces.add(p);
+
+        return p;
+
     }
 
     private Integer[] adjustPosition(Boolean color, String piece){
@@ -80,20 +100,9 @@ public class FactoryPiece {
             }
         }
 
-        System.out.println(Arrays.toString(position));
-
         return position;
     }
 
-    private void addWhitePiece(){
-
-    }
-
-    /*
-    static Piece noire( String nomPion){
-        return new Fou(true);
-    }
-     */
 
 
 }
