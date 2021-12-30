@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//Les test sont réalisé comme si la pièce en questions était toute seul sur le plateau
 class PieceTest {
 
     private final FactoryPiece factory = new FactoryPiece();
@@ -191,6 +192,49 @@ class PieceTest {
         Piece cavalier = factory.blanche("Cavalier");
 
         ArrayList<Integer[]> zone = cavalier.zoneDeDeplacement();
+
+        AssertBetweenArray(attendu, zone);
+
+    }
+
+    //Déplacement de la reine, qui combine les déplacements du cavalier et du fou
+    @Test
+    public void deplacementReine() throws Exception{
+
+        ArrayList<Integer[]> attendu = new ArrayList<>(){
+            {
+                add(new Integer[]{3,0});
+                add(new Integer[]{3,8});
+                add(new Integer[]{4,1});
+                add(new Integer[]{4, 7});
+                add(new Integer[]{5, 2});
+                add(new Integer[]{5, 6});
+                add(new Integer[]{6, 3});
+                add(new Integer[]{6, 5});
+                add(new Integer[]{8, 5});
+                add(new Integer[]{8, 3});
+                add(new Integer[]{7, 0});
+                add(new Integer[]{7, 1});
+                add(new Integer[]{7, 2});
+                add(new Integer[]{7, 3});
+                add(new Integer[]{7, 5});
+                add(new Integer[]{7, 6});
+                add(new Integer[]{7, 7});
+                add(new Integer[]{7, 8});
+                add(new Integer[]{0, 4});
+                add(new Integer[]{1, 4});
+                add(new Integer[]{2, 4});
+                add(new Integer[]{3, 4});
+                add(new Integer[]{4, 4});
+                add(new Integer[]{5, 4});
+                add(new Integer[]{6, 4});
+                add(new Integer[]{8, 4});
+            }
+        };
+
+        Piece reine = factory.blanche("Reine");
+
+        ArrayList<Integer[]> zone = reine.zoneDeDeplacement();
 
         AssertBetweenArray(attendu, zone);
 

@@ -14,7 +14,7 @@ public class Cavalier extends Piece {
     }
 
     @Override
-    protected ArrayList<Integer[]> zoneDeDeplacement(){
+    public ArrayList<Integer[]> zoneDeDeplacement(){
         cleanZone();
 
         for (int i = 0; i < 4; i++) {

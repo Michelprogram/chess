@@ -18,7 +18,7 @@ public class Pion extends Piece {
     }
 
     @Override
-    protected ArrayList<Integer[]> zoneDeDeplacement() {
+    public ArrayList<Integer[]> zoneDeDeplacement() {
         cleanZone();
 
         if(premierTour){

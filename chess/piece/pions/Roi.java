@@ -13,7 +13,7 @@ public class Roi extends Piece {
     }
 
     @Override
-    protected ArrayList<Integer[]> zoneDeDeplacement(){
+    public ArrayList<Integer[]> zoneDeDeplacement(){
 
         cleanZone();
 

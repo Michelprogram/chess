@@ -100,7 +100,7 @@ public abstract class Piece {
         this.menace = menace;
     }
 
-    protected ArrayList<Integer[]> zoneDeDeplacement(){
+    public ArrayList<Integer[]> zoneDeDeplacement(){
         return null;
     }
 
@@ -123,13 +123,5 @@ public abstract class Piece {
                 " menacé " + (menace ? "oui": "non");
 
     }
-
-    public void stringTest(){
-
-        ArrayList<Integer[]> test = zoneDeDeplacement();
-
-         test.forEach(el -> System.out.println(Arrays.toString(el)));
-    }
-
-
+    
 }
