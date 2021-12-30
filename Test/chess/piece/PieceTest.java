@@ -13,11 +13,20 @@ class PieceTest {
     private final Piece roiBlanc = factory.blanche("Roi");
     private final Piece roiNoir = factory.noire("Roi");
 
+    public void AssertBetweenArray(ArrayList<Integer[]> tab1, ArrayList<Integer[]> tab2){
+        for (int i = 0; i < tab1.size(); i++) {
+            Integer[] element1 = tab1.get(i);
+            Integer[] element2 = tab2.get(i);
+
+            assertArrayEquals(element1, element2);
+        }
+    }
 
     @Test
     public void coordonnesLetter() throws Exception{
         String[] attendu = { "1" , "d"};
         Integer[] attendu2 = { 7, 3};
+
         assertArrayEquals(roiBlanc.getPositionLetter(), attendu);
         assertArrayEquals(roiBlanc.getPositionNumber(), attendu2);
     }
@@ -29,6 +38,7 @@ class PieceTest {
         assertEquals(roiBlanc.getOrdonnee(),7);
     }
 
+    //Déplacement du roi tout autour de lui, range 1 case
     @Test
     public void deplacementRoi() throws Exception{
         ArrayList<Integer[]> attendu = new ArrayList<>(){
@@ -43,15 +53,11 @@ class PieceTest {
 
         ArrayList<Integer[]> zone = roiNoir.zoneDeDeplacement();
 
-        for (int i = 0; i < attendu.size(); i++) {
-            Integer[] tab1 = attendu.get(i);
-            Integer[] tab2 = zone.get(i);
-
-            assertArrayEquals(tab1, tab2);
-        }
+        AssertBetweenArray(attendu, zone);
 
     }
 
+    //Déplacement de la tour horizontale et verticale aussi bien devant que derrière
     @Test
     public void deplacementTour() throws Exception{
 
@@ -85,15 +91,11 @@ class PieceTest {
 
         ArrayList<Integer[]> zone = tour.zoneDeDeplacement();
 
-        for (int i = 0; i < attendu.size(); i++) {
-            Integer[] tab1 = attendu.get(i);
-            Integer[] tab2 = zone.get(i);
-
-            assertArrayEquals(tab1, tab2);
-        }
+        AssertBetweenArray(attendu, zone);
 
     }
 
+    //Déplacement du fou en diagonale aussi bien devant que derrière
     @Test
     public void deplacementFou() throws Exception{
 
@@ -129,12 +131,47 @@ class PieceTest {
 
         ArrayList<Integer[]> zone = fou.zoneDeDeplacement();
 
-        for (int i = 0; i < attendu.size(); i++) {
-            Integer[] tab1 = attendu.get(i);
-            Integer[] tab2 = zone.get(i);
+        AssertBetweenArray(attendu, zone);
 
-            assertArrayEquals(tab1, tab2);
-        }
+    }
+
+    //Déplacement du pion sur 2 cases maximum
+    @Test
+    public void deplacementPion() throws Exception{
+
+        ArrayList<Integer[]> attendu = new ArrayList<>(){
+            {
+                add(new Integer[]{6,0});
+                add(new Integer[]{5,0});
+            }
+        };
+
+        Piece pion = factory.blanche("Pion");
+
+        ArrayList<Integer[]> zone = pion.zoneDeDeplacement();
+
+        AssertBetweenArray(attendu, zone);
+
+    }
+
+    //Déplacement du pion après son premier tour donc passe à une case de déplacement et non 2
+    @Test
+    public void deplacementPion2() throws Exception{
+
+        ArrayList<Integer[]> attendu = new ArrayList<>(){
+            {
+                add(new Integer[]{5,0});
+            }
+        };
+
+        Piece pion = factory.blanche("Pion");
+
+        //Joue son premier tour
+        pion.zoneDeDeplacement();
+
+        ArrayList<Integer[]> zone = pion.zoneDeDeplacement();
+
+        AssertBetweenArray(attendu, zone);
 
     }
 }
