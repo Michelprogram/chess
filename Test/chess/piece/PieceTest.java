@@ -43,7 +43,7 @@ class PieceTest {
     //Déplacement du roi tout autour de lui, range 1 case
     @Test
     public void deplacementRoi() throws Exception{
-        ArrayList<Integer[]> attendu = new ArrayList<>(){
+        ArrayList<Integer[]> attendu = new ArrayList<Integer[]>(){
             {
                 add(new Integer[]{0, 2});
                 add(new Integer[]{0, 4});
@@ -63,7 +63,7 @@ class PieceTest {
     @Test
     public void deplacementTour() throws Exception{
 
-        ArrayList<Integer[]> attendu = new ArrayList<>(){
+        ArrayList<Integer[]> attendu = new ArrayList<Integer[]>(){
                 {
                     //Axe horizontale
                     add(new Integer[]{2, 0});
@@ -101,7 +101,7 @@ class PieceTest {
     @Test
     public void deplacementFou() throws Exception{
 
-        ArrayList<Integer[]> attendu = new ArrayList<>(){
+        ArrayList<Integer[]> attendu = new ArrayList<Integer[]>(){
             {
                 add(new Integer[]{0,0});
                 add(new Integer[]{0,6});
@@ -142,7 +142,7 @@ class PieceTest {
     @Test
     public void deplacementPion() throws Exception{
 
-        ArrayList<Integer[]> attendu = new ArrayList<>(){
+        ArrayList<Integer[]> attendu = new ArrayList<Integer[]>(){
             {
                 add(new Integer[]{6,0});
                 add(new Integer[]{5,0});
@@ -161,7 +161,7 @@ class PieceTest {
     @Test
     public void deplacementPion2() throws Exception{
 
-        ArrayList<Integer[]> attendu = new ArrayList<>(){
+        ArrayList<Integer[]> attendu = new ArrayList<Integer[]>(){
             {
                 add(new Integer[]{5,0});
             }
@@ -182,7 +182,7 @@ class PieceTest {
     @Test
     public void deplacementCavalier() throws Exception{
 
-        ArrayList<Integer[]> attendu = new ArrayList<>(){
+        ArrayList<Integer[]> attendu = new ArrayList<Integer[]>(){
             {
                 add(new Integer[]{5,0});
                 add(new Integer[]{5,2});
@@ -202,7 +202,7 @@ class PieceTest {
     @Test
     public void deplacementReine() throws Exception{
 
-        ArrayList<Integer[]> attendu = new ArrayList<>(){
+        ArrayList<Integer[]> attendu = new ArrayList<Integer[]>(){
             {
                 add(new Integer[]{3,0});
                 add(new Integer[]{3,8});

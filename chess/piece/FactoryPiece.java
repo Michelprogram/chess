@@ -26,15 +26,30 @@ public class FactoryPiece {
 
         Integer[] position = adjustPosition(white, nomPion);
 
-        Piece p = switch (nomPion) {
-            case ("Fou") -> new Fou(white, 'B', position);
-            case ("Cavalier") -> new Cavalier(white, 'K',position);
-            case ("Pion") -> new Pion(white, 'P', position);
-            case ("Reine") -> new Reine(white, 'Q', position);
-            case ("Tour") -> new Tour(white, 'R', position);
-            case ("Roi") -> new Roi(white, 'K', position);
-            default -> null;
-        };
+        Piece p;
+        switch (nomPion) {
+            case ("Fou"):
+                p = new Fou(white, 'B', position);
+                break;
+            case ("Cavalier"):
+                p = new Cavalier(white, 'K', position);
+                break;
+            case ("Pion"):
+                p = new Pion(white, 'P', position);
+                break;
+            case ("Reine"):
+                p = new Reine(white, 'Q', position);
+                break;
+            case ("Tour"):
+                p = new Tour(white, 'R', position);
+                break;
+            case ("Roi"):
+                p = new Roi(white, 'K', position);
+                break;
+            default:
+                p = null;
+                break;
+        }
 
         whitePieces.add(p);
 
@@ -45,15 +60,30 @@ public class FactoryPiece {
     public Piece noire( String nomPion){
         Integer[] position = adjustPosition(black, nomPion);
 
-        Piece p = switch (nomPion) {
-            case ("Fou") -> new Fou(black, 'B', position);
-            case ("Cavalier") -> new Cavalier(black, 'K',position);
-            case ("Pion") -> new Pion(black, 'P', position);
-            case ("Reine") -> new Reine(black, 'Q', position);
-            case ("Tour") -> new Tour(black, 'R', position);
-            case ("Roi") -> new Roi(black, 'K', position);
-            default -> null;
-        };
+        Piece p;
+        switch (nomPion) {
+            case ("Fou"):
+                p = new Fou(black, 'B', position);
+                break;
+            case ("Cavalier"):
+                p = new Cavalier(black, 'K', position);
+                break;
+            case ("Pion"):
+                p = new Pion(black, 'P', position);
+                break;
+            case ("Reine"):
+                p = new Reine(black, 'Q', position);
+                break;
+            case ("Tour"):
+                p = new Tour(black, 'R', position);
+                break;
+            case ("Roi"):
+                p = new Roi(black, 'K', position);
+                break;
+            default:
+                p = null;
+                break;
+        }
 
         blackPieces.add(p);
 
@@ -80,30 +110,30 @@ public class FactoryPiece {
         }
 
         switch (piece) {
-            case "Pion" -> {
+            case "Pion":
                 position[1] = (int) occurrence;
                 position[0] = color ? 6 : 1;
-            }
-            case "Tour" -> {
+                break;
+            case "Tour":
                 position[1] = (int) occurrence * 7;
                 position[0] = color ? 7 : 0;
-            }
-            case "Cavalier" -> {
+                break;
+            case "Cavalier":
                 position[1] = (int) occurrence == 0 ? 1 : 6;
                 position[0] = color ? 7 : 0;
-            }
-            case "Fou" -> {
+                break;
+            case "Fou":
                 position[1] = (int) occurrence == 0 ? 2 : 5;
                 position[0] = color ? 7 : 0;
-            }
-            case "Roi" -> {
+                break;
+            case "Roi":
                 position[1] = 3;
                 position[0] = color ? 7 : 0;
-            }
-            case "Reine" -> {
+                break;
+            case "Reine":
                 position[1] = 4;
                 position[0] = color ? 7 : 0;
-            }
+                break;
         }
 
         return position;

@@ -40,7 +40,7 @@ class FactoryPieceTest{
     @Test
     public void pieceBlanche() throws Exception{
 
-        ArrayList<Integer[]> attendu = new ArrayList<>(){
+        ArrayList<Integer[]> attendu = new ArrayList<Integer[]>(){
             {
                 //Les pions
                 add(new Integer[]{6,0});
@@ -113,7 +113,7 @@ class FactoryPieceTest{
     @Test
     public void pieceNoire() throws Exception{
 
-        ArrayList<Integer[]> attendu = new ArrayList<>(){
+        ArrayList<Integer[]> attendu = new ArrayList<Integer[]>(){
             {
                 //Les pions
                 add(new Integer[]{1,0});
