@@ -136,6 +136,7 @@ class PieceTest {
     }
 
     //Déplacement du pion sur 2 cases maximum
+    //Test échoue quand on les exécute tous
     @Test
     public void deplacementPion() throws Exception{
 
@@ -170,6 +171,26 @@ class PieceTest {
         pion.zoneDeDeplacement();
 
         ArrayList<Integer[]> zone = pion.zoneDeDeplacement();
+
+        AssertBetweenArray(attendu, zone);
+
+    }
+
+    //Déplacement du cavalier en L aussi bien en avant qu'en arrière
+    @Test
+    public void deplacementCavalier() throws Exception{
+
+        ArrayList<Integer[]> attendu = new ArrayList<>(){
+            {
+                add(new Integer[]{5,0});
+                add(new Integer[]{5,2});
+                add(new Integer[]{6,3});
+            }
+        };
+
+        Piece cavalier = factory.blanche("Cavalier");
+
+        ArrayList<Integer[]> zone = cavalier.zoneDeDeplacement();
 
         AssertBetweenArray(attendu, zone);
 

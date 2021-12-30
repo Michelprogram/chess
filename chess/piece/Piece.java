@@ -15,6 +15,8 @@ public abstract class Piece {
     private Boolean couleur;
     private Boolean menace;
 
+    protected ArrayList<Integer[]> zone;
+
 
     public Piece(Boolean couleur,char namePiece, Integer[] positionNumber) {
         this.couleur = couleur;
@@ -24,6 +26,8 @@ public abstract class Piece {
         this.positionNumber = positionNumber;
 
         this.menace = false;
+
+        this.zone = new ArrayList<>();
 
         numberToLetter();
 
@@ -42,6 +46,9 @@ public abstract class Piece {
         setPositionLetter(tab);
     }
 
+    protected void cleanZone(){
+        this.zone.clear();
+    }
 
     public char getCharacter() {
         return character;

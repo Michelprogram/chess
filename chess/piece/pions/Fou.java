@@ -15,7 +15,7 @@ public class Fou extends Piece {
     @Override
     protected ArrayList<Integer[]> zoneDeDeplacement(){
 
-        ArrayList<Integer[]> zone = new ArrayList<>();
+        cleanZone();
 
         //Part d'en haut à gauche
         Integer[] position = { getOrdonnee() - 7, getAbscisse() - 7};
@@ -42,11 +42,11 @@ public class Fou extends Piece {
 
             //Evite de jouer sur la même case
             if (!Arrays.equals(tempo1,getPositionNumber())){
-                zone.add(Arrays.copyOf(tempo1, 2));
-                zone.add(Arrays.copyOf(tempo2, 2));
+                this.zone.add(Arrays.copyOf(tempo1, 2));
+                this.zone.add(Arrays.copyOf(tempo2, 2));
             }
         }
 
-        return filterDeplacement(zone);
+        return filterDeplacement(this.zone);
     }
 }

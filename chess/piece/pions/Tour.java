@@ -17,7 +17,7 @@ public class Tour extends Piece {
     @Override
     protected ArrayList<Integer[]> zoneDeDeplacement(){
 
-        ArrayList<Integer[]> zone = new ArrayList<>();
+        cleanZone();
 
         Integer[] position = { getOrdonnee() - 7, getAbscisse() - 7};
 
@@ -30,14 +30,14 @@ public class Tour extends Piece {
 
                 //Evite de jouer sur la même case
                 if (!Arrays.equals(tempo,getPositionNumber())){
-                    zone.add(Arrays.copyOf(tempo, 2));
+                    this.zone.add(Arrays.copyOf(tempo, 2));
                 }
 
             }
         }
 
         //Nettoie le tableau des zones en dehors du plateau
-        return filterDeplacement(zone);
+        return filterDeplacement(this.zone);
 
     }
 

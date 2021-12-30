@@ -16,10 +16,10 @@ public class Pion extends Piece {
 
         premierTour = true;
     }
-    
+
     @Override
     protected ArrayList<Integer[]> zoneDeDeplacement() {
-        ArrayList<Integer[]> zone = new ArrayList<>();
+        cleanZone();
 
         if(premierTour){
             for (int i = 0; i < 2; i++) {
@@ -28,19 +28,19 @@ public class Pion extends Piece {
                 tempo[0] = getCouleur() ? getOrdonnee() - i: getOrdonnee() + i;
                 tempo[1] = getAbscisse();
 
-                zone.add(Arrays.copyOf(tempo, 2));
+                this.zone.add(Arrays.copyOf(tempo, 2));
             }
 
             premierTour = false;
         }
         //Si un pion adverse en diagonale peut le manger
         else{
-            zone.add(new Integer[]{
+            this.zone.add(new Integer[]{
                     getCouleur() ? getOrdonnee() - 1 : getOrdonnee() + 1,
                     getAbscisse()
             });
         }
 
-        return filterDeplacement(zone);
+        return filterDeplacement(this.zone);
     }
 }
