@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-//TODO mettre en attriut zone
 public abstract class Piece {
 
     private char character;
@@ -33,6 +32,7 @@ public abstract class Piece {
 
     }
 
+    //Converti les coordonnées en lettre
     protected void numberToLetter(){
 
         //97 -> a dans la table ASCII
@@ -46,6 +46,7 @@ public abstract class Piece {
         setPositionLetter(tab);
     }
 
+    //Vide le tableau de zone de déplacement
     protected void cleanZone(){
         this.zone.clear();
     }
@@ -62,6 +63,7 @@ public abstract class Piece {
         return positionNumber;
     }
 
+    //Met à jour les coordonnées de la pièces lors de son déplacement
     public void setPositionNumber(Integer[] positionNumber) {
         this.positionNumber = positionNumber;
 
@@ -100,17 +102,19 @@ public abstract class Piece {
         this.menace = menace;
     }
 
+    //Méthode qui se fait override par les class enfants
     public ArrayList<Integer[]> zoneDeDeplacement(){
         return null;
     }
 
-    //Après avoir trouvé les zones de déplacement ont nettoie toutes les cases qui sont en dehors du plateau
+    //Après avoir trouvé les zones de déplacement on nettoie toutes les cases qui sont en dehors du plateau
     protected ArrayList<Integer[]> filterDeplacement(ArrayList<Integer[]> zone){
         return (ArrayList<Integer[]>) zone.stream()
                 .filter( el -> (el[0] >= 0 && el[0] <= 8) && (el[1] >= 0 && el[1] <= 8) )
                 .collect(Collectors.toList());
     }
 
+    //Permet d'avoir des informations supplémentaires sur une pièce
     @Override
     public String toString() {
         return "Je suis un(e) " + this.getClass().getSimpleName() +
@@ -123,5 +127,5 @@ public abstract class Piece {
                 " menacé " + (menace ? "oui": "non");
 
     }
-    
+
 }

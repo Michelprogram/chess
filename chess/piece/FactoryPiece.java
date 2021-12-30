@@ -3,12 +3,15 @@ package chess.piece;
 import chess.piece.pions.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class FactoryPiece {
 
     private final Boolean white;
     private final Boolean black;
+
+    /*
+        Liste de pion noir et blanc pour savoir à quel endroit les positionnés.
+     */
 
     static ArrayList<Piece> whitePieces = new ArrayList<>();
     static ArrayList<Piece> blackPieces = new ArrayList<>();
@@ -18,6 +21,7 @@ public class FactoryPiece {
         black = false;
     }
 
+    //Factory pour les pièces blanches
     public Piece blanche( String nomPion){
 
         Integer[] position = adjustPosition(white, nomPion);
@@ -37,6 +41,7 @@ public class FactoryPiece {
         return p;
     }
 
+    //Factory pour les pièces noires
     public Piece noire( String nomPion){
         Integer[] position = adjustPosition(black, nomPion);
 
@@ -56,6 +61,7 @@ public class FactoryPiece {
 
     }
 
+    //Ajuste la position du futur en fonction des autres précédemment instancié
     private Integer[] adjustPosition(Boolean color, String piece){
 
         Integer[] position = new Integer[2];
@@ -102,7 +108,5 @@ public class FactoryPiece {
 
         return position;
     }
-
-
 
 }

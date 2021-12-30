@@ -5,29 +5,22 @@ import chess.piece.pions.Roi;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/*
-@Test
-public void Test() throws Exception{
-    assertTrue();
-    assertFalse(;
-}
-
- */
 
 class FactoryPieceTest{
 
     private final FactoryPiece factoryPiece = new FactoryPiece();
 
+    //Si la création de la pièce est bonne
     @Test
     public void InstanceOf() throws Exception{
         assertTrue(factoryPiece.blanche("Roi") instanceof Piece);
         assertFalse(factoryPiece.blanche("Roi") instanceof Reine);
     }
 
+    //Si les coordonnées sont bons après plusieurs instanciations d'une même pièce de la même couleur
     @Test
     public void position() throws Exception{
 
@@ -43,6 +36,7 @@ class FactoryPieceTest{
 
     }
 
+    //Si les coordonnées des pièces blanches sont cohérentes
     @Test
     public void pieceBlanche() throws Exception{
 
@@ -115,6 +109,7 @@ class FactoryPieceTest{
 
     }
 
+    //Si les coordonnées des pièces noires sont cohérentes
     @Test
     public void pieceNoire() throws Exception{
 
@@ -187,6 +182,7 @@ class FactoryPieceTest{
 
     }
 
+    //Pas vraiment un test juste avoir une description de chaque pièce blanche
     @Test
     public void affichagePiece(){
         int nbPion = 8;

@@ -23,6 +23,7 @@ class PieceTest {
         }
     }
 
+    //Conversion des coordonnées cohérentes
     @Test
     public void coordonnesLetter() throws Exception{
         String[] attendu = { "1" , "d"};
@@ -239,4 +240,5 @@ class PieceTest {
         AssertBetweenArray(attendu, zone);
 
     }
+
 }

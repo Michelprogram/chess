@@ -17,6 +17,8 @@ public class Roi extends Piece {
 
         cleanZone();
 
+        //Se positionne en haut à gauche par rapport aux coordonnées du roi,
+        // puis lit sur 3 lignes les coordonnées possible
         Integer[] position = { getOrdonnee() - 1, getAbscisse() - 1};
 
         for (int i = 0; i < 3; i++) {
@@ -33,9 +35,6 @@ public class Roi extends Piece {
                 }
             }
         }
-
-        //Nettoie le tableau des zones en dehors du plateau
         return filterDeplacement(this.zone);
-
     }
 }

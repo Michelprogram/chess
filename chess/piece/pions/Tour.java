@@ -19,6 +19,7 @@ public class Tour extends Piece {
 
         cleanZone();
 
+        //Se positionne tout à gauche par rapport aux coordonnées de la tour
         Integer[] position = { getOrdonnee() - 7, getAbscisse() - 7};
 
         for (int i = 0; i < 2; i++) {
@@ -35,10 +36,7 @@ public class Tour extends Piece {
 
             }
         }
-
-        //Nettoie le tableau des zones en dehors du plateau
         return filterDeplacement(this.zone);
-
     }
 
 }

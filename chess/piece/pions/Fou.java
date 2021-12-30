@@ -17,7 +17,7 @@ public class Fou extends Piece {
 
         cleanZone();
 
-        //Part d'en haut à gauche
+        //Se positionne en haut à gauche puis lit en miroir les coordonnées.
         Integer[] position = { getOrdonnee() - 7, getAbscisse() - 7};
 
         int compteur = 14;
@@ -46,7 +46,6 @@ public class Fou extends Piece {
                 this.zone.add(Arrays.copyOf(tempo2, 2));
             }
         }
-
         return filterDeplacement(this.zone);
     }
 }

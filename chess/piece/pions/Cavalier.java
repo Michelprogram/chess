@@ -13,6 +13,7 @@ public class Cavalier extends Piece {
         super(couleur, namePiece, position);
     }
 
+    //Cherche les zones possible
     @Override
     public ArrayList<Integer[]> zoneDeDeplacement(){
         cleanZone();
