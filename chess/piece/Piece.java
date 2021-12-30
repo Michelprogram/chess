@@ -1,5 +1,7 @@
 package chess.piece;
 
+import Chess2.Couleur;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -12,6 +14,7 @@ public abstract class Piece {
     private String[] positionLetter;
 
     private Boolean couleur;
+    protected String couleurCharacter;
     private Boolean menace;
 
     protected ArrayList<Integer[]> zone;
@@ -19,6 +22,8 @@ public abstract class Piece {
 
     public Piece(Boolean couleur,char namePiece, Integer[] positionNumber) {
         this.couleur = couleur;
+        if(couleur) this.couleurCharacter = Couleur.ANSI_WHITE_BOLD_BRIGHT.getValue();
+        else if(!couleur) this.couleurCharacter = Couleur.ANSI_BLACK.getValue();
 
         this.character = namePiece;
 
@@ -79,11 +84,11 @@ public abstract class Piece {
     }
 
     public Integer getAbscisse(){
-        return this.getPositionNumber()[1];
+        return this.getPositionNumber()[0];
     }
 
     public Integer getOrdonnee(){
-        return this.getPositionNumber()[0];
+        return this.getPositionNumber()[1];
     }
 
     public Boolean getCouleur() {
@@ -117,15 +122,7 @@ public abstract class Piece {
     //Permet d'avoir des informations supplémentaires sur une pièce
     @Override
     public String toString() {
-        return "Je suis un(e) " + this.getClass().getSimpleName() +
-                " symbolisé par " + character +
-                " à la position " + Arrays.toString(positionNumber) +
-                " et aussi " + Arrays.toString(positionLetter) +
-                " d'abscisse " + getAbscisse() +
-                " et d'ordonnée " + getOrdonnee()+
-                " de couleur " + (couleur ? "blanche" : "noire") +
-                " menacé " + (menace ? "oui": "non");
-
+        return this.couleurCharacter + this.character;
     }
 
 }

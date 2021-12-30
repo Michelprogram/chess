@@ -29,10 +29,10 @@ public class FactoryPiece {
         Piece p;
         switch (nomPion) {
             case ("Fou"):
-                p = new Fou(white, 'B', position);
+                p = new Fou(white, 'F', position);
                 break;
             case ("Cavalier"):
-                p = new Cavalier(white, 'K', position);
+                p = new Cavalier(white, 'C', position);
                 break;
             case ("Pion"):
                 p = new Pion(white, 'P', position);
@@ -41,10 +41,10 @@ public class FactoryPiece {
                 p = new Reine(white, 'Q', position);
                 break;
             case ("Tour"):
-                p = new Tour(white, 'R', position);
+                p = new Tour(white, 'T', position);
                 break;
             case ("Roi"):
-                p = new Roi(white, 'K', position);
+                p = new Roi(white, 'R', position);
                 break;
             default:
                 p = null;
@@ -63,22 +63,22 @@ public class FactoryPiece {
         Piece p;
         switch (nomPion) {
             case ("Fou"):
-                p = new Fou(black, 'B', position);
+                p = new Fou(black, 'F', position);
                 break;
             case ("Cavalier"):
-                p = new Cavalier(black, 'K', position);
+                p = new Cavalier(black, 'C', position);
                 break;
             case ("Pion"):
                 p = new Pion(black, 'P', position);
                 break;
             case ("Reine"):
-                p = new Reine(black, 'Q', position);
+                p = new Reine(black, 'R', position);
                 break;
             case ("Tour"):
-                p = new Tour(black, 'R', position);
+                p = new Tour(black, 'T', position);
                 break;
             case ("Roi"):
-                p = new Roi(black, 'K', position);
+                p = new Roi(black, 'R', position);
                 break;
             default:
                 p = null;
