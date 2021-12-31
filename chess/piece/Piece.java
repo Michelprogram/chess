@@ -11,7 +11,7 @@ public abstract class Piece {
     private char character;
 
     private Integer[] positionNumber;
-    private String[] positionLetter;
+    private String positionLetter;
 
     private Boolean couleur;
     protected String couleurCharacter;
@@ -43,10 +43,7 @@ public abstract class Piece {
         //97 -> a dans la table ASCII
         final int asciiChar = 97 + this.positionNumber[1];
 
-        String[] tab = {
-                Integer.toString(8 - this.positionNumber[0]),
-                String.valueOf( ((char) asciiChar))
-        };
+        String tab = Integer.toString(8 - this.positionNumber[0]) + String.valueOf( ((char) asciiChar));
 
         setPositionLetter(tab);
     }
@@ -75,11 +72,11 @@ public abstract class Piece {
         numberToLetter();
     }
 
-    public String[] getPositionLetter() {
+    public String getPositionLetter() {
         return positionLetter;
     }
 
-    public void setPositionLetter(String[] positionLetter) {
+    public void setPositionLetter(String positionLetter) {
         this.positionLetter = positionLetter;
     }
 

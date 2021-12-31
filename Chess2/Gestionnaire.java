@@ -8,8 +8,8 @@ public class Gestionnaire {
         affichage.afficher();
 
         //test - obtention d'une case
-        Case c = plateau.getCase("h6");
-        System.out.println(c.getPosition()[0] + " : " + c.getPosition()[1]);
+        Case c = plateau.getCase("h8");
+        System.out.println(c.getPosition()[1] + " : " + c.getPosition()[0]);
 
         //test - affichage de la piècesur la case
         System.out.println(plateau.getPiece(c));

@@ -8,7 +8,6 @@ public class Case {
 
     public Case(String nom, Integer[] position){
         this.nom = nom;
-        //this.couleur = couleur;
         this.position = position;
 
         //couleur de la case en fonction de son état

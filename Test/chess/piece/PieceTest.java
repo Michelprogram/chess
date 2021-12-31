@@ -26,10 +26,10 @@ class PieceTest {
     //Conversion des coordonnées cohérentes
     @Test
     public void coordonnesLetter() throws Exception{
-        String[] attendu = { "1" , "d"};
+        String attendu = "1d";
         Integer[] attendu2 = { 7, 3};
 
-        assertArrayEquals(roiBlanc.getPositionLetter(), attendu);
+        assertEquals(roiBlanc.getPositionLetter(), attendu);
         assertArrayEquals(roiBlanc.getPositionNumber(), attendu2);
     }
 

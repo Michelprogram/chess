@@ -2,6 +2,7 @@ package Chess2;
 
 import chess.piece.FactoryPiece;
 import chess.piece.Piece;
+import org.junit.platform.commons.util.StringUtils;
 
 import java.util.*;
 
@@ -17,48 +18,47 @@ public class Plateau implements Sujet {
         this.cases = new LinkedHashMap<>(64);//le plateau contient 64 cases
         this.factoryPiece = new FactoryPiece();
 
-        Piece tourNoire = factoryPiece.blanche("Tour");
-        Piece tourNoire2 = factoryPiece.blanche("Tour");
-        Piece cavalierNoir = factoryPiece.blanche("Cavalier");
-        Piece cavalierNoir2 = factoryPiece.blanche("Cavalier");
-        Piece fouNoir = factoryPiece.blanche("Fou");
-        Piece fouNoir2 = factoryPiece.blanche("Fou");
-        Piece roiNoir = factoryPiece.blanche("Roi");
-        Piece reineNoir = factoryPiece.blanche("Reine");
+        Piece tourNoire = factoryPiece.noire("Tour");
+        Piece tourNoire2 = factoryPiece.noire("Tour");
+        Piece cavalierNoir = factoryPiece.noire("Cavalier");
+        Piece cavalierNoir2 = factoryPiece.noire("Cavalier");
+        Piece fouNoir = factoryPiece.noire("Fou");
+        Piece fouNoir2 = factoryPiece.noire("Fou");
+        Piece roiNoir = factoryPiece.noire("Roi");
+        Piece reineNoir = factoryPiece.noire("Reine");
 
-        cases.put(new Case(Arrays.toString(tourNoire.getPositionLetter()), tourNoire.getPositionNumber()),tourNoire);
-        cases.put(new Case(Arrays.toString(cavalierNoir.getPositionLetter()), cavalierNoir.getPositionNumber()),cavalierNoir);
-        cases.put(new Case(Arrays.toString(fouNoir.getPositionLetter()), fouNoir.getPositionNumber()),fouNoir);
-        cases.put(new Case(Arrays.toString(roiNoir.getPositionLetter()), roiNoir.getPositionNumber()),roiNoir);
-        cases.put(new Case(Arrays.toString(reineNoir.getPositionLetter()), reineNoir.getPositionNumber()),reineNoir);
-        cases.put(new Case(Arrays.toString(fouNoir2.getPositionLetter()), fouNoir2.getPositionNumber()),fouNoir2);
-        cases.put(new Case(Arrays.toString(cavalierNoir2.getPositionLetter()), cavalierNoir2.getPositionNumber()),cavalierNoir2);
-        cases.put(new Case(Arrays.toString(tourNoire2.getPositionLetter()), tourNoire2.getPositionNumber()),tourNoire2);
+        cases.put(new Case("a1", new Integer[]{0,0}),tourNoire);
+        cases.put(new Case("b1", new Integer[]{0,1}),cavalierNoir);
+        cases.put(new Case("c1", new Integer[]{0,2}),fouNoir);
+        cases.put(new Case("d1", new Integer[]{0,3}),roiNoir);
+        cases.put(new Case("e1", new Integer[]{0,4}),reineNoir);
+        cases.put(new Case("f1", new Integer[]{0,5}),fouNoir2);
+        cases.put(new Case("g1", new Integer[]{0,6}),cavalierNoir2);
+        cases.put(new Case("h1", new Integer[]{0,7}),tourNoire2);
 
         for (int i = 0; i<8; i++) {
-            //factoryPiece.blanche("Pion");
-            //String lettre = Convertisseur.toLetter(i);
+            String lettre = Convertisseur.toLetter(i);
             Piece pion = factoryPiece.noire("Pion");
-            cases.put(new Case(Arrays.toString(pion.getPositionLetter()), pion.getPositionNumber()),pion);
+            cases.put(new Case(lettre+"2", new Integer[]{1,i}),pion);
         }
 
         //--4 rangées vides au centre du plateau
         for(int i=0;i<8;i++){
             for(int j=2;j<6;j++){
                 String lettre = Convertisseur.toLetter(i);
-                Case ca = new Case(lettre+(j),new Integer[]{i,j});
+                Case ca = new Case(lettre+(j),new Integer[]{j,i});
                 cases.put(ca,null);
             }
         }
 
         for (int i = 0; i<8; i++) {
-            //factoryPiece.blanche("Pion");
-            //String lettre = Convertisseur.toLetter(i);
+            String lettre = Convertisseur.toLetter(i);
             Piece pion = factoryPiece.blanche("Pion");
-            cases.put(new Case(Arrays.toString(pion.getPositionLetter()), pion.getPositionNumber()),pion);
+            cases.put(new Case(lettre+"7", new Integer[]{6,i}),pion);
         }
 
         Piece tourBlanche = factoryPiece.blanche("Tour");
+
         Piece tourBlanche2 = factoryPiece.blanche("Tour");
         Piece cavalierBlanc = factoryPiece.blanche("Cavalier");
         Piece cavalierBlanc2 = factoryPiece.blanche("Cavalier");
@@ -67,14 +67,14 @@ public class Plateau implements Sujet {
         Piece roiBlanc = factoryPiece.blanche("Roi");
         Piece reineBlanche = factoryPiece.blanche("Reine");
 
-        cases.put(new Case(Arrays.toString(tourBlanche.getPositionLetter()), tourBlanche.getPositionNumber()),tourBlanche);
-        cases.put(new Case(Arrays.toString(cavalierBlanc.getPositionLetter()), cavalierBlanc.getPositionNumber()),cavalierBlanc);
-        cases.put(new Case(Arrays.toString(fouBlanc.getPositionLetter()), fouBlanc.getPositionNumber()),fouBlanc);
-        cases.put(new Case(Arrays.toString(roiBlanc.getPositionLetter()), roiBlanc.getPositionNumber()),roiBlanc);
-        cases.put(new Case(Arrays.toString(reineBlanche.getPositionLetter()), reineBlanche.getPositionNumber()),reineBlanche);
-        cases.put(new Case(Arrays.toString(fouBlanc2.getPositionLetter()), fouBlanc2.getPositionNumber()),fouBlanc2);
-        cases.put(new Case(Arrays.toString(cavalierBlanc2.getPositionLetter()), cavalierBlanc2.getPositionNumber()),cavalierBlanc2);
-        cases.put(new Case(Arrays.toString(tourBlanche2.getPositionLetter()), tourBlanche2.getPositionNumber()),tourBlanche2);
+        cases.put(new Case("a8", new Integer[]{7,0}),tourBlanche);
+        cases.put(new Case("b8", new Integer[]{7,1}),cavalierBlanc);
+        cases.put(new Case("c8", new Integer[]{7,2}),fouBlanc);
+        cases.put(new Case("d8", new Integer[]{7,3}),roiBlanc);
+        cases.put(new Case("e8", new Integer[]{7,4}),reineBlanche);
+        cases.put(new Case("f8", new Integer[]{7,5}),fouBlanc2);
+        cases.put(new Case("g8", new Integer[]{7,6}),cavalierBlanc2);
+        cases.put(new Case("h8", new Integer[]{7,7}),tourBlanche2);
 
         /*
         //création des pièces
