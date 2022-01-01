@@ -53,10 +53,11 @@ public class Plateau implements Sujet {
         }
 
         //--4 rangées vides au centre du plateau
-        for (int i = 0; i < 8; i++) {
-            for (int j = 2; j < 6; j++) {
-                String lettre = Convertisseur.toLetter(i);
-                Case ca = new Case(lettre + (j), new Integer[]{j, i});
+        for (int i = 3; i <= 6; i++) {
+            for (int j = 0; j < 8; j++) {
+                String lettre = Convertisseur.toLetter(j);
+                String nomCase = lettre + i;
+                Case ca = new Case(nomCase, new Integer[]{i, j});
                 cases.put(ca, null);
             }
         }
@@ -114,7 +115,12 @@ public class Plateau implements Sujet {
     }
 
     //déplace une pièce sur une case du plateau
-    public void deplacerPiece(Piece piece,Case newCase){
+    public void deplacerPiece(Piece piece,Case ancienneCase,Case nouvelleCase){
+        //vérifier si le déplacement est possible. Si oui :
+
+        piece.setPositionNumber(nouvelleCase.getPosition());//la pièce adopte la position de la nouvelle case
+        cases.replace(nouvelleCase,piece);//on dépose la pièce sur la nouvelle case choisie
+        cases.replace(ancienneCase,null);//l'ancienne case devient vide
     }
 
     //----------------------observateur----------------------------

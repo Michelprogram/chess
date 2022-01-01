@@ -22,6 +22,12 @@ public class Affichage implements Observateur {
         this.cases = this.plateau.getCases();
     }
 
+    public void reset(){
+        //a compléter
+        //System.out.print("\033[H\033[2J");
+        //System.out.flush();
+    }
+
     public void afficher(){
         //code pour affichage du plateau
         int compteur = 0;
