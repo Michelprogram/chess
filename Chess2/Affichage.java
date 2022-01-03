@@ -24,9 +24,23 @@ public class Affichage implements Observateur {
     }
 
     public void reset(){
-        //a compléter
-        //System.out.print("\033[H\033[2J");
-        //System.out.flush();
+
+        String os = System.getProperty("os.name");
+        String command = os.contains("Windows") ? "cls" : "clear";
+
+        try{
+            Runtime.getRuntime().exec(command);
+        }
+        catch (Exception err){
+            System.out.println("Impossible de clear le terminal");
+        }
+
+        /*
+        Si ne marche pas, essayer avec ça
+                System.out.print("Everything on the console will cleared");
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+         */
     }
 
     public void afficher(){
