@@ -1,5 +1,7 @@
 package Chess2;
 
+import chess.cases.Case;
+import chess.cases.CaseSelectionee;
 import chess.piece.Piece;
 
 import java.util.Scanner;

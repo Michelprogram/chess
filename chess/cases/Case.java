@@ -1,4 +1,4 @@
-package Chess2;
+package chess.cases;
 
 public class Case {
     private String couleur;

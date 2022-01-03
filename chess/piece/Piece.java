@@ -81,11 +81,11 @@ public abstract class Piece {
     }
 
     public Integer getAbscisse(){
-        return this.getPositionNumber()[0];
+        return this.getPositionNumber()[1];
     }
 
     public Integer getOrdonnee(){
-        return this.getPositionNumber()[1];
+        return this.getPositionNumber()[0];
     }
 
     public Boolean getCouleur() {

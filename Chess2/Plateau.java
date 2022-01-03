@@ -1,8 +1,8 @@
 package Chess2;
 
+import chess.cases.Case;
 import chess.piece.FactoryPiece;
 import chess.piece.Piece;
-import org.junit.platform.commons.util.StringUtils;
 
 import java.util.*;
 

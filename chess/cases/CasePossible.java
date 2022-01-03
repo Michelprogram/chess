@@ -1,4 +1,6 @@
-package Chess2;
+package chess.cases;
+
+import Chess2.Couleur;
 
 public class CasePossible implements ComportementCase {
     @Override

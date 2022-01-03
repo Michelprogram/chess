@@ -1,5 +1,6 @@
 package Chess2;
 
+import chess.cases.Case;
 import chess.piece.Piece;
 
 import java.util.Map;
