@@ -1,6 +1,6 @@
 package Chess2;
 
-import chess.cases.Case;
+import chess.cases.*;
 import chess.piece.FactoryPiece;
 import chess.piece.Piece;
 
@@ -17,7 +17,6 @@ public class Plateau implements Sujet {
         this.cases = new LinkedHashMap<>(64);//le plateau contient 64 cases
         this.initPlateau();
 
-        this.notifierObs();//met à jour l'affichage
         for(Piece p : cases.values()){
             if(p!=null) pieces.add(p);
         }
@@ -101,6 +100,18 @@ public class Plateau implements Sujet {
         return caseRecherchee;
     }
 
+    //renvoie une case en fonction de sa position
+    public Case getCase(Integer[] coordonne){
+        Case caseRecherchee = null;
+        for(Case c : cases.keySet()){
+            if(Arrays.equals(c.getPosition(),coordonne)){
+                caseRecherchee = c;
+                break;
+            }
+        }
+        return caseRecherchee;
+    }
+
     //renvoie la pièce qui se situe sur la case c
     public Piece getPiece(Case c){
         if(c != null){
@@ -114,15 +125,60 @@ public class Plateau implements Sujet {
         return this.cases;
     }
 
-    //déplace une pièce sur une case du plateau
-    public void deplacerPiece(Piece piece,Case ancienneCase,Case nouvelleCase){
-        //vérifier si le déplacement est possible. Si oui :
+    //-------------------------------------------------------------------------
+    //sélectionne une pièce et met en surbrillance la zone de déplacement
+    public Piece selectionnerPiece(Case caseSelectionnee){
+        caseSelectionnee.setComportementCase(new CaseSelectionee());
+        Piece pieceSelectionnee = this.getPiece(caseSelectionnee);
 
-        piece.setPositionNumber(nouvelleCase.getPosition());//la pièce adopte la position de la nouvelle case
-        cases.replace(nouvelleCase,piece);//on dépose la pièce sur la nouvelle case choisie
-        cases.replace(ancienneCase,null);//l'ancienne case devient vide
+        if(pieceSelectionnee!=null){//si la pièce existe
+            ArrayList<Integer[]> zoneDeplacement = pieceSelectionnee.zoneDeDeplacement();//on récupère la zone de déplacement de la pièce
+            for(Integer[] coordonneCase : zoneDeplacement){
+                System.out.println(coordonneCase[0] + " : " + coordonneCase[1]);
+                Case casePossible = this.getCase(coordonneCase);
+                if(casePossible!=null) {//si la case existe
+                    casePossible.setComportementCase(new CasePossible());
+                    if(cases.get(casePossible)!=null)//si la case possède une pièce
+                    {
+                        Piece p = cases.get(casePossible);//on récupère la pièce associée à la case
+                        if(p.getCouleur() == pieceSelectionnee.getCouleur()){//si la pièce est de mon équipe
+
+                        }else{
+                            casePossible.setComportementCase(new CaseEnDanger());
+                        }
+                    }
+                }
+            }
+        }
+
+        this.notifierObs();//met à jour l'affichage
+        return pieceSelectionnee;
     }
 
+    //déplace une pièce sur une case du plateau
+    public void deplacerPiece(Piece piece,Case ancienneCase,Case nouvelleCase){
+        //vérifier si le déplacement est possible:
+        for(Integer[] coordonne : piece.zoneDeDeplacement()){
+            if(Arrays.equals(coordonne,nouvelleCase.getPosition())){//si la case de destination se trouve dans la liste des déplacements possibles de la pièce
+                piece.setPositionNumber(nouvelleCase.getPosition());//la pièce adopte la position de la nouvelle case
+                cases.replace(nouvelleCase,piece);//on dépose la pièce sur la nouvelle case choisie
+                cases.replace(ancienneCase,null);//l'ancienne case devient vide
+
+                this.reinitialiserCases();//on réinitialise les états des cases
+                return;
+            }
+        }
+        System.out.println("Impossible de déplacer la pièce");
+
+    }
+
+    //réinitialise l'état des cases
+    private void reinitialiserCases(){
+        for(Case c : cases.keySet()){
+            c.setComportementCase(new CaseNormale());
+        }
+        this.notifierObs();//met à jour l'affichage
+    }
     //----------------------observateur----------------------------
     @Override
     public void enregistrerObs(Observateur o) {

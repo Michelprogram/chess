@@ -112,7 +112,7 @@ public abstract class Piece {
     //Après avoir trouvé les zones de déplacement on nettoie toutes les cases qui sont en dehors du plateau
     protected ArrayList<Integer[]> filterDeplacement(ArrayList<Integer[]> zone){
         return (ArrayList<Integer[]>) zone.stream()
-                .filter( el -> (el[0] >= 0 && el[0] <= 8) && (el[1] >= 0 && el[1] <= 8) )
+                .filter( el -> (el[0] >= 0 && el[0] < 8) && (el[1] >= 0 && el[1] < 8) )
                 .collect(Collectors.toList());
     }
 

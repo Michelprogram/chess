@@ -72,7 +72,7 @@ public class FactoryPiece {
                 p = new Pion(black, 'P', position);
                 break;
             case ("Reine"):
-                p = new Reine(black, 'R', position);
+                p = new Reine(black, 'Q', position);
                 break;
             case ("Tour"):
                 p = new Tour(black, 'T', position);

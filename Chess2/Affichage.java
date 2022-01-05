@@ -11,7 +11,10 @@ public class Affichage implements Observateur {
 
     public Affichage(Plateau plateau){
         this.plateau = plateau;
+        plateau.enregistrerObs(this);
         this.cases = plateau.getCases();
+
+        this.afficher();//affiche le jeu dès sa création
     }
 
     public void setPlateau(Plateau plateau){
@@ -21,6 +24,8 @@ public class Affichage implements Observateur {
     @Override
     public void actualiser() {
         this.cases = this.plateau.getCases();
+        this.reset();//clear la console
+        this.afficher();//affiche le nouveau plateau
     }
 
     public void reset(){
@@ -28,19 +33,14 @@ public class Affichage implements Observateur {
         String os = System.getProperty("os.name");
         String command = os.contains("Windows") ? "cls" : "clear";
 
-        try{
+        /*try{
             Runtime.getRuntime().exec(command);
         }
         catch (Exception err){
             System.out.println("Impossible de clear le terminal");
-        }
-
-        /*
-        Si ne marche pas, essayer avec ça
-                System.out.print("Everything on the console will cleared");
+        }*/
         System.out.print("\033[H\033[2J");
         System.out.flush();
-         */
     }
 
     public void afficher(){
