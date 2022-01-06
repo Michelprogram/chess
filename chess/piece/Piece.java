@@ -7,8 +7,20 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public abstract class Piece {
-
-
+    //constantes déplacement (en partant de la case en haut à gauche -> (0;0))
+    protected ArrayList<Integer[]> DEPLACEMENT_LIGNE = new ArrayList(){{
+        for(int i=-1;i>=-7;i--){add(new Integer[]{i,0});}
+        for(int i=1;i<=7;i++){add(new Integer[]{0,i});}
+        for(int i=1;i<=7;i++){add(new Integer[]{i,0});}
+        for(int i=-1;i>=-7;i--){add(new Integer[]{0,i});}
+    }};
+    protected ArrayList<Integer[]> DEPLACEMENT_CROIX = new ArrayList(){{
+        for(int i=-1;i>=-7;i--){add(new Integer[]{i,Math.abs(i)});}//ex : (-1;1)
+        for(int i=1;i<=7;i++){add(new Integer[]{i,i});}
+        for(int i=-1;i>=-7;i--){add(new Integer[]{Math.abs(i),i});}//ex : (1
+        for(int i=-1;i>=-7;i--){add(new Integer[]{i,i});}
+    }};
+    //------------------------------------------------------------------------------
     protected char character;
     protected Integer[] positionNumber;
     protected String positionLetter;
@@ -39,11 +51,6 @@ public abstract class Piece {
         String tab = Integer.toString(8 - this.positionNumber[0]) + String.valueOf( ((char) asciiChar));
 
         setPositionLetter(tab);
-    }
-
-    //Vide le tableau de zone de déplacement
-    protected void cleanZone(){
-        this.zone.clear();
     }
 
     public char getCharacter() {
@@ -97,9 +104,30 @@ public abstract class Piece {
         this.menace = menace;
     }
 
-    //Méthode qui se fait override par les class enfants
+    //-------------------------------------------------------------------------------------------
+    //Vide le tableau de zone de déplacement et le réinitialise
+    protected void cleanZone(){
+        this.zone.clear();
+    }
+    //Méthode qui se fait override par les classes enfants
     public ArrayList<Integer[]> zoneDeDeplacement(){
-        return null;
+        //cleanZone();
+        //copie de la zone de déplacement
+        ArrayList<Integer[]> zoneDeplacementCopie = new ArrayList<>();
+        for(Integer[] coordonne : zone){
+            zoneDeplacementCopie.add(coordonne);
+        }
+
+        //on récupère la position de la pièce par rapport à la case (0;0)
+        int deltaX = this.getAbscisse();
+        int deltaY = this.getOrdonnee();
+
+        //on modifie la zone de déplacement en conséquence
+        for(Integer[] coordonne : zoneDeplacementCopie){
+            coordonne[0]+=deltaY;
+            coordonne[1]+=deltaX;
+        }
+        return filterDeplacement(zoneDeplacementCopie);
     }
 
     //Après avoir trouvé les zones de déplacement on nettoie toutes les cases qui sont en dehors du plateau
