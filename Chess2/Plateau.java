@@ -4,6 +4,7 @@ import chess.cases.*;
 import chess.piece.FactoryPiece;
 import chess.piece.Piece;
 
+import javax.xml.bind.SchemaOutputResolver;
 import java.util.*;
 
 public class Plateau implements Sujet {
@@ -133,11 +134,13 @@ public class Plateau implements Sujet {
 
         if(pieceSelectionnee!=null){//si la pièce existe
             ArrayList<Integer[]> zoneDeplacement = pieceSelectionnee.zoneDeDeplacement();//on récupère la zone de déplacement de la pièce
+            System.out.println("Cases possibles : ");
             for(Integer[] coordonneCase : zoneDeplacement){
-                System.out.println(coordonneCase[0] + " : " + coordonneCase[1]);
+                System.out.println(Arrays.toString(coordonneCase));
                 Case casePossible = this.getCase(coordonneCase);
                 if(casePossible!=null) {//si la case existe
                     casePossible.setComportementCase(new CasePossible());
+                    System.out.println("Coordonee de la case : " + Arrays.toString(casePossible.getPosition()));
                     if(cases.get(casePossible)!=null)//si la case possède une pièce
                     {
                         Piece p = cases.get(casePossible);//on récupère la pièce associée à la case
@@ -157,6 +160,7 @@ public class Plateau implements Sujet {
 
     //déplace une pièce sur une case du plateau
     public void deplacerPiece(Piece piece,Case ancienneCase,Case nouvelleCase){
+        System.out.println("Case destination : " + Arrays.toString(nouvelleCase.getPosition()));
         //vérifier si le déplacement est possible:
         for(Integer[] coordonne : piece.zoneDeDeplacement()){
             if(Arrays.equals(coordonne,nouvelleCase.getPosition())){//si la case de destination se trouve dans la liste des déplacements possibles de la pièce
@@ -168,12 +172,11 @@ public class Plateau implements Sujet {
                 return;
             }
         }
-        System.out.println("Impossible de déplacer la pièce");
-
+        //System.out.println("Impossible de déplacer la pièce");
     }
 
     //réinitialise l'état des cases
-    private void reinitialiserCases(){
+    public void reinitialiserCases(){
         for(Case c : cases.keySet()){
             c.setComportementCase(new CaseNormale());
         }

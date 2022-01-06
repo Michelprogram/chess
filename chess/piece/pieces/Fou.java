@@ -11,8 +11,10 @@ public class Fou extends Piece {
     public Fou(Boolean couleur, Integer[] position){
         super(couleur, position);
         this.character = 'F';
+        this.zone.addAll(DEPLACEMENT_CROIX);
     }
 
+    /*
     @Override
     public ArrayList<Integer[]> zoneDeDeplacement(){
 
@@ -48,5 +50,5 @@ public class Fou extends Piece {
             }
         }
         return filterDeplacement(this.zone);
-    }
+    }*/
 }

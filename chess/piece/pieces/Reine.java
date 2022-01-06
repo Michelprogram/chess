@@ -11,10 +11,13 @@ public class Reine extends Piece {
     public Reine(Boolean couleur,Integer[] position){
         super(couleur, position);
         this.character = 'Q';
+        this.zone.addAll(DEPLACEMENT_LIGNE);
+        this.zone.addAll(DEPLACEMENT_CROIX);
     }
 
     //Le déplacement de la reine combine le fou et tour, on crée un fou et une tour pour reprendre leur zone de
     // déplacement et les combiner.
+    /*
     @Override
     public ArrayList<Integer[]> zoneDeDeplacement(){
         FactoryPiece factoryPiece = new FactoryPiece();
@@ -33,6 +36,6 @@ public class Reine extends Piece {
         //Pas besoin de filtrer, car déjà fais dans celui du fou et de la tour
         return this.zone;
 
-    }
+    }*/
 
 }

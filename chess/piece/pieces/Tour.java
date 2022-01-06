@@ -12,13 +12,19 @@ public class Tour extends Piece {
     public Tour(Boolean couleur, Integer[] position){
         super(couleur, position);
         this.character = 'T';
-
+        zone.addAll(DEPLACEMENT_LIGNE);
     }
 
     @Override
+    protected void cleanZone() {
+        super.cleanZone();
+    }
+
+    /*  @Override
+
     public ArrayList<Integer[]> zoneDeDeplacement(){
 
-        cleanZone();
+        //cleanZone();
 
         //Se positionne tout à gauche par rapport aux coordonnées de la tour
         Integer[] position = { getOrdonnee() - 7, getAbscisse() - 7};
@@ -37,7 +43,7 @@ public class Tour extends Piece {
 
             }
         }
-        return filterDeplacement(this.zone);
-    }
+        return null;
+    }*/
 
 }
