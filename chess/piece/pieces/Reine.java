@@ -1,4 +1,4 @@
-package chess.piece.pions;
+package chess.piece.pieces;
 
 import chess.piece.FactoryPiece;
 import chess.piece.Piece;
@@ -8,8 +8,9 @@ import java.util.ArrayList;
 //Queen
 //Déplacement partout sans limite
 public class Reine extends Piece {
-    public Reine(Boolean couleur, char charactere, Integer[] position){
-        super(couleur, charactere, position);
+    public Reine(Boolean couleur,Integer[] position){
+        super(couleur, position);
+        this.character = 'Q';
     }
 
     //Le déplacement de la reine combine le fou et tour, on crée un fou et une tour pour reprendre leur zone de

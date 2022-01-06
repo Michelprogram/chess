@@ -1,6 +1,6 @@
 package chess.piece;
 
-import chess.piece.pions.*;
+import chess.piece.pieces.*;
 
 import java.util.ArrayList;
 
@@ -29,22 +29,22 @@ public class FactoryPiece {
         Piece p;
         switch (nomPion) {
             case ("Fou"):
-                p = new Fou(white, 'F', position);
+                p = new Fou(white,position);
                 break;
             case ("Cavalier"):
-                p = new Cavalier(white, 'C', position);
+                p = new Cavalier(white,position);
                 break;
             case ("Pion"):
-                p = new Pion(white, 'P', position);
+                p = new Pion(white,position);
                 break;
             case ("Reine"):
-                p = new Reine(white, 'Q', position);
+                p = new Reine(white,position);
                 break;
             case ("Tour"):
-                p = new Tour(white, 'T', position);
+                p = new Tour(white,position);
                 break;
             case ("Roi"):
-                p = new Roi(white, 'R', position);
+                p = new Roi(white, position);
                 break;
             default:
                 p = null;
@@ -63,22 +63,22 @@ public class FactoryPiece {
         Piece p;
         switch (nomPion) {
             case ("Fou"):
-                p = new Fou(black, 'F', position);
+                p = new Fou(black, position);
                 break;
             case ("Cavalier"):
-                p = new Cavalier(black, 'C', position);
+                p = new Cavalier(black,position);
                 break;
             case ("Pion"):
-                p = new Pion(black, 'P', position);
+                p = new Pion(black,position);
                 break;
             case ("Reine"):
-                p = new Reine(black, 'Q', position);
+                p = new Reine(black,position);
                 break;
             case ("Tour"):
-                p = new Tour(black, 'T', position);
+                p = new Tour(black, position);
                 break;
             case ("Roi"):
-                p = new Roi(black, 'R', position);
+                p = new Roi(black,position);
                 break;
             default:
                 p = null;

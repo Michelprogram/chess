@@ -1,7 +1,6 @@
 package chess.piece;
 
-import chess.piece.pions.Reine;
-import chess.piece.pions.Roi;
+import chess.piece.pieces.Reine;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

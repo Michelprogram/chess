@@ -1,4 +1,4 @@
-package chess.piece.pions;
+package chess.piece.pieces;
 
 import chess.piece.Piece;
 
@@ -9,8 +9,9 @@ import java.util.Arrays;
 //Déplacement en L
 public class Cavalier extends Piece {
 
-    public Cavalier(Boolean couleur, char namePiece, Integer[] position) {
-        super(couleur, namePiece, position);
+    public Cavalier(Boolean couleur, Integer[] position) {
+        super(couleur, position);
+        this.character = 'C';
     }
 
     //Cherche les zones possible

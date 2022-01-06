@@ -1,4 +1,4 @@
-package chess.piece.pions;
+package chess.piece.pieces;
 
 import chess.piece.Piece;
 
@@ -8,8 +8,9 @@ import java.util.Arrays;
 //King
 //Déplacement partout 1 seul case autour de lui
 public class Roi extends Piece {
-    public Roi(Boolean couleur, char charactere, Integer[] position){
-        super(couleur, charactere, position);
+    public Roi(Boolean couleur, Integer[] position){
+        super(couleur, position);
+        this.character = 'R';
     }
 
     @Override

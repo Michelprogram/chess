@@ -1,4 +1,4 @@
-package chess.piece.pions;
+package chess.piece.pieces;
 
 import chess.piece.Piece;
 
@@ -9,8 +9,9 @@ import java.util.Arrays;
 //Déplacement horizontale, verticale sans limite
 public class Tour extends Piece {
 
-    public Tour(Boolean couleur, char charactere, Integer[] position){
-        super(couleur, charactere, position);
+    public Tour(Boolean couleur, Integer[] position){
+        super(couleur, position);
+        this.character = 'T';
 
     }
 

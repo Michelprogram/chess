@@ -1,4 +1,4 @@
-package chess.piece.pions;
+package chess.piece.pieces;
 
 import chess.piece.Piece;
 
@@ -8,8 +8,9 @@ import java.util.Arrays;
 //Bishop
 //Déplacement diagonale sans limite
 public class Fou extends Piece {
-    public Fou(Boolean couleur, char namePiece, Integer[] position){
-        super(couleur, namePiece, position);
+    public Fou(Boolean couleur, Integer[] position){
+        super(couleur, position);
+        this.character = 'F';
     }
 
     @Override

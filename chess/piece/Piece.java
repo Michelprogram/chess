@@ -8,33 +8,26 @@ import java.util.stream.Collectors;
 
 public abstract class Piece {
 
-    private char character;
 
-    private Integer[] positionNumber;
-    private String positionLetter;
-
-    private Boolean couleur;
+    protected char character;
+    protected Integer[] positionNumber;
+    protected String positionLetter;
+    protected Boolean couleur;
     protected String couleurCharacter;
-    private Boolean menace;
-
+    protected Boolean menace;//maybe
     protected ArrayList<Integer[]> zone;
 
 
-    public Piece(Boolean couleur,char namePiece, Integer[] positionNumber) {
+    public Piece(Boolean couleur,Integer[] positionNumber) {
         this.couleur = couleur;
         if(couleur) this.couleurCharacter = Couleur.ANSI_WHITE_BOLD_BRIGHT.getValue();
         else if(!couleur) this.couleurCharacter = Couleur.ANSI_BLACK.getValue();
 
-        this.character = namePiece;
-
         this.positionNumber = positionNumber;
-
         this.menace = false;
-
         this.zone = new ArrayList<>();
 
         numberToLetter();
-
     }
 
     //Converti les coordonnées en lettre

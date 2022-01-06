@@ -1,4 +1,4 @@
-package chess.piece.pions;
+package chess.piece.pieces;
 
 import chess.piece.Piece;
 
@@ -12,9 +12,9 @@ public class Pion extends Piece {
     //Le pion change de possibilité de déplacement au second tour
     private boolean premierTour;
 
-    public Pion(Boolean couleur, char namePiece, Integer[] position) {
-        super(couleur, namePiece, position);
-
+    public Pion(Boolean couleur, Integer[] position) {
+        super(couleur, position);
+        this.character = 'P';
         premierTour = true;
     }
 
