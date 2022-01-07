@@ -15,11 +15,6 @@ public class Tour extends Piece {
         zone.addAll(DEPLACEMENT_LIGNE);
     }
 
-    @Override
-    protected void cleanZone() {
-        super.cleanZone();
-    }
-
     /*  @Override
 
     public ArrayList<Integer[]> zoneDeDeplacement(){

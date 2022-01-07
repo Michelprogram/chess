@@ -105,29 +105,23 @@ public abstract class Piece {
     }
 
     //-------------------------------------------------------------------------------------------
-    //Vide le tableau de zone de déplacement et le réinitialise
-    protected void cleanZone(){
-        this.zone.clear();
-    }
     //Méthode qui se fait override par les classes enfants
     public ArrayList<Integer[]> zoneDeDeplacement(){
-        //cleanZone();
-        //copie de la zone de déplacement
-        ArrayList<Integer[]> zoneDeplacementCopie = new ArrayList<>();
-        for(Integer[] coordonne : zone){
-            zoneDeplacementCopie.add(coordonne);
-        }
-
         //on récupère la position de la pièce par rapport à la case (0;0)
         int deltaX = this.getAbscisse();
         int deltaY = this.getOrdonnee();
 
         //on modifie la zone de déplacement en conséquence
-        for(Integer[] coordonne : zoneDeplacementCopie){
-            coordonne[0]+=deltaY;
-            coordonne[1]+=deltaX;
+        ArrayList<Integer[]> zoneDeplacementCopie = new ArrayList<>();//copie de la zone de déplacement
+        for(Integer[] coordonne : zone){
+            zoneDeplacementCopie.add(new Integer[]{coordonne[0]+deltaY,coordonne[1]+deltaX});
         }
         return filterDeplacement(zoneDeplacementCopie);
+    }
+
+    //Vide le tableau de zone de déplacement et le réinitialise
+    public void cleanZone(){
+        this.zone.clear();
     }
 
     //Après avoir trouvé les zones de déplacement on nettoie toutes les cases qui sont en dehors du plateau

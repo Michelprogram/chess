@@ -55,7 +55,7 @@ public class Plateau implements Sujet {
         for (int i = 2; i <= 5; i++) {
             for (int j = 0; j < 8; j++) {
                 String lettre = Convertisseur.toLetter(j);
-                String nomCase = lettre + i;
+                String nomCase = lettre + (i+1);
                 Case ca = new Case(nomCase, new Integer[]{i, j});
                 cases.put(ca, null);
             }
@@ -133,9 +133,9 @@ public class Plateau implements Sujet {
 
         if(pieceSelectionnee!=null){//si la pièce existe
             ArrayList<Integer[]> zoneDeplacement = pieceSelectionnee.zoneDeDeplacement();//on récupère la zone de déplacement de la pièce
-            System.out.println("Cases possibles : ");
+            //System.out.println("Cases possibles : ");
             for(Integer[] coordonneCase : zoneDeplacement){
-                System.out.println(Arrays.toString(coordonneCase));
+                //System.out.println(Arrays.toString(coordonneCase));
                 Case casePossible = this.getCase(coordonneCase);
                 if(casePossible!=null) {//si la case existe
                     casePossible.setComportementCase(new CasePossible());
@@ -171,7 +171,7 @@ public class Plateau implements Sujet {
                 return;
             }
         }
-        //System.out.println("Impossible de déplacer la pièce");
+        System.out.println("Impossible de déplacer la pièce");
     }
 
     //réinitialise l'état des cases
