@@ -24,7 +24,7 @@ public class Affichage implements Observateur {
     @Override
     public void actualiser() {
         this.cases = this.plateau.getCases();
-        this.reset();//clear la console
+        //this.reset();//clear la console
         this.afficher();//affiche le nouveau plateau
     }
 

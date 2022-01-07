@@ -4,7 +4,6 @@ import chess.cases.*;
 import chess.piece.FactoryPiece;
 import chess.piece.Piece;
 
-import javax.xml.bind.SchemaOutputResolver;
 import java.util.*;
 
 public class Plateau implements Sujet {
@@ -53,7 +52,7 @@ public class Plateau implements Sujet {
         }
 
         //--4 rangées vides au centre du plateau
-        for (int i = 3; i <= 6; i++) {
+        for (int i = 2; i <= 5; i++) {
             for (int j = 0; j < 8; j++) {
                 String lettre = Convertisseur.toLetter(j);
                 String nomCase = lettre + i;
@@ -140,7 +139,7 @@ public class Plateau implements Sujet {
                 Case casePossible = this.getCase(coordonneCase);
                 if(casePossible!=null) {//si la case existe
                     casePossible.setComportementCase(new CasePossible());
-                    System.out.println("Coordonee de la case : " + Arrays.toString(casePossible.getPosition()));
+                    //System.out.println("Case colorée : " + Arrays.toString(casePossible.getPosition()));
                     if(cases.get(casePossible)!=null)//si la case possède une pièce
                     {
                         Piece p = cases.get(casePossible);//on récupère la pièce associée à la case
