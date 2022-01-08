@@ -90,9 +90,10 @@ public class Plateau implements Sujet {
 
     //renvoie une case en fonction de son nom
     public Case getCase(String nom){
+        String nomCase = nom.toLowerCase(Locale.ROOT);//on met le nom en minuscule pour être au bon format
         Case caseRecherchee = null;
         for(Case c : cases.keySet()){
-            if(c.getNom().equals(nom)){
+            if(c.getNom().equals(nomCase)){
                 caseRecherchee = c;
                 break;
             }
