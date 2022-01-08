@@ -8,17 +8,17 @@ import java.util.stream.Collectors;
 
 public abstract class Piece {
     //constantes déplacement (en partant de la case en haut à gauche -> (0;0))
-    protected ArrayList<Integer[]> DEPLACEMENT_LIGNE = new ArrayList(){{
-        for(int i=-1;i>=-7;i--){add(new Integer[]{i,0});}
-        for(int i=1;i<=7;i++){add(new Integer[]{0,i});}
-        for(int i=1;i<=7;i++){add(new Integer[]{i,0});}
-        for(int i=-1;i>=-7;i--){add(new Integer[]{0,i});}
+    protected ArrayList<ArrayList<Integer[]>> DEPLACEMENT_LIGNE = new ArrayList(){{
+        add(new ArrayList<Integer[]>(){{for(int i=-1;i>=-7;i--){add(new Integer[]{i,0});}}});
+        add(new ArrayList<Integer[]>(){{for(int i=1;i<=7;i++){add(new Integer[]{0,i});}}});
+        add(new ArrayList<Integer[]>(){{for(int i=1;i<=7;i++){add(new Integer[]{i,0});}}});
+        add(new ArrayList<Integer[]>(){{for(int i=-1;i>=-7;i--){add(new Integer[]{0,i});}}});
     }};
-    protected ArrayList<Integer[]> DEPLACEMENT_CROIX = new ArrayList(){{
-        for(int i=-1;i>=-7;i--){add(new Integer[]{i,Math.abs(i)});}//ex : (-1;1)
-        for(int i=1;i<=7;i++){add(new Integer[]{i,i});}
-        for(int i=-1;i>=-7;i--){add(new Integer[]{Math.abs(i),i});}//ex : (1;-1)
-        for(int i=-1;i>=-7;i--){add(new Integer[]{i,i});}
+    protected ArrayList<ArrayList<Integer[]>> DEPLACEMENT_CROIX = new ArrayList(){{
+        add(new ArrayList<Integer[]>(){{for(int i=-1;i>=-7;i--){add(new Integer[]{i,Math.abs(i)});}}});//ex : (-1;1)
+        add(new ArrayList<Integer[]>(){{for(int i=1;i<=7;i++){add(new Integer[]{i,i});}}});
+        add(new ArrayList<Integer[]>(){{for(int i=-1;i>=-7;i--){add(new Integer[]{Math.abs(i),i});}}});//ex : (1;-1)
+        add(new ArrayList<Integer[]>(){{for(int i=-1;i>=-7;i--){add(new Integer[]{i,i});}}});
     }};
     //------------------------------------------------------------------------------
     protected char character;
@@ -27,8 +27,8 @@ public abstract class Piece {
     protected Boolean couleur;
     protected String couleurCharacter;
     protected Boolean menace;//maybe
-    protected ArrayList<Integer[]> zone;//zone de déplacement de la piece (sans prendre en compte la position des autres pièces)
-    protected ArrayList<Integer[]> zoneRecalculee;//zone de déplacement de la piece (tenant compte de la position des autres pièces)
+    protected ArrayList<ArrayList<Integer[]>> zone;//zone de déplacement de la piece (sans prendre en compte la position des autres pièces)
+    protected ArrayList<ArrayList<Integer[]>> zoneRecalculee;//zone de déplacement de la piece (tenant compte de la position des autres pièces)
 
 
     public Piece(Boolean couleur,Integer[] positionNumber) {
@@ -108,17 +108,24 @@ public abstract class Piece {
 
     //-------------------------------------------------------------------------------------------
     //Méthode qui se fait override par certaines classes enfants, calcule la zone de déplacement
-    public ArrayList<Integer[]> zoneDeDeplacement(){
+    public ArrayList<ArrayList<Integer[]>> zoneDeDeplacement(){
         //on récupère la position de la pièce par rapport à la case (0;0)
         int deltaX = this.getAbscisse();
         int deltaY = this.getOrdonnee();
 
         //on modifie la zone de déplacement en conséquence
-        ArrayList<Integer[]> zoneDeplacementCopie = new ArrayList<>();//copie de la zone de déplacement
-        for(Integer[] coordonne : zone){
-            zoneDeplacementCopie.add(new Integer[]{coordonne[0]+deltaY,coordonne[1]+deltaX});
+        ArrayList<ArrayList<Integer[]>> zoneDeplacementCopie = new ArrayList<>();//copie de la zone de déplacement
+        for(ArrayList<Integer[]> ligne : zone){
+            ArrayList<Integer[]> ligneCopie = new ArrayList<>();
+            for(Integer[] coordonne : ligne){
+                int nouvelAbcisse = coordonne[1]+deltaX;
+                int nouvelleOrdonnee = coordonne[0]+deltaY;
+                if((nouvelAbcisse >= 0 && nouvelAbcisse < 8) && (nouvelleOrdonnee >= 0 && nouvelleOrdonnee < 8))//filtrage de la zone
+                    ligneCopie.add(new Integer[]{nouvelleOrdonnee,nouvelAbcisse});
+            }
+            zoneDeplacementCopie.add(ligneCopie);
         }
-        return filterDeplacement(zoneDeplacementCopie);
+        return zoneDeplacementCopie;
     }
 
     //Vide le tableau de zone de déplacement et le réinitialise
@@ -133,11 +140,11 @@ public abstract class Piece {
                 .collect(Collectors.toList());
     }
 
-    public ArrayList<Integer[]> getZoneRecalculee() {
+    public ArrayList<ArrayList<Integer[]>> getZoneRecalculee() {
         return zoneRecalculee;
     }
 
-    public void setZoneRecalculee(ArrayList<Integer[]> zoneRecalculee) {
+    public void setZoneRecalculee(ArrayList<ArrayList<Integer[]>> zoneRecalculee) {
         this.zoneRecalculee = zoneRecalculee;
     }
 

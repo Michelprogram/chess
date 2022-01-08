@@ -17,7 +17,7 @@ public class Pion extends Piece {
         this.character = 'P';
         premierTour = true;
     }
-
+/*
     @Override
     public ArrayList<Integer[]> zoneDeDeplacement() {
         cleanZone();
@@ -45,5 +45,5 @@ public class Pion extends Piece {
         }
 
         return filterDeplacement(this.zone);
-    }
+    }*/
 }

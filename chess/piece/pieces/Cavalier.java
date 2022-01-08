@@ -9,11 +9,11 @@ import java.util.Arrays;
 //Déplacement en L
 public class Cavalier extends Piece {
     //déplacement en L à partir de la case (0;0)
-    private ArrayList<Integer[]> DEPLACEMENT_L = new ArrayList(){{
-        add(new Integer[]{-2,1});add(new Integer[]{-1,2});
-        add(new Integer[]{1,2});add(new Integer[]{2,1});
-        add(new Integer[]{2,-1});add(new Integer[]{1,-2});
-        add(new Integer[]{-1,-2});add(new Integer[]{-2,-1});
+    private ArrayList<ArrayList<Integer[]>> DEPLACEMENT_L = new ArrayList(){{
+        add(new ArrayList<Integer[]>(){{add(new Integer[]{-2,1});}}); add(new ArrayList<Integer[]>(){{add(new Integer[]{-1,2});}});
+        add(new ArrayList<Integer[]>(){{add(new Integer[]{1,2});}}); add(new ArrayList<Integer[]>(){{add(new Integer[]{2,1});}});
+        add(new ArrayList<Integer[]>(){{add(new Integer[]{2,-1});}}); add(new ArrayList<Integer[]>(){{add(new Integer[]{1,-2});}});
+        add(new ArrayList<Integer[]>(){{add(new Integer[]{-1,-2});}}); add(new ArrayList<Integer[]>(){{add(new Integer[]{-2,-1});}});
     }};
 
     public Cavalier(Boolean couleur, Integer[] position) {

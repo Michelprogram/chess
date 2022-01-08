@@ -129,25 +129,30 @@ public class Plateau implements Sujet {
     //-------------------------------------------------------------------------
     //réduit la zone de déplacement d'une pièce en fonction de la position des autres pièces sur le plateau
     private void filterDeplacement(Piece piece){
-        ArrayList<Integer[]> zoneDeplacement = piece.zoneDeDeplacement();
-        ArrayList<Integer[]> nouvelleZoneDeplacement = new ArrayList<>();//copie affinée de la liste de déplacement
+        ArrayList<ArrayList<Integer[]>> zoneDeplacement = piece.zoneDeDeplacement();
+        ArrayList<ArrayList<Integer[]>> nouvelleZoneDeplacement = new ArrayList();//copie affinée de la liste de déplacement
 
         //System.out.println("Cases possibles : ");
-        for(Integer[] coordonneCase : zoneDeplacement){
-            //System.out.println(Arrays.toString(coordonneCase));
-            Case casePossible = this.getCase(coordonneCase);
-            if(casePossible!=null) {//si la case existe
-                if(cases.get(casePossible)!=null){//si la case possède une pièce
-                    Piece p = cases.get(casePossible);//on récupère la pièce associée à la case
-                    if(p.getCouleur() != piece.getCouleur()){//si la pièce est de l'équipe adverse
-                        nouvelleZoneDeplacement.add(coordonneCase);
-                        casePossible.setComportementCase(new CaseEnDanger());//je peux la manger
+        for(ArrayList<Integer[]> ligne : zoneDeplacement){
+            ArrayList<Integer[]> ligneCopie = new ArrayList<>();//copie de la ligne
+            for(Integer[] coordonneCase : ligne){
+                //System.out.println(Arrays.toString(coordonneCase));
+                Case casePossible = this.getCase(coordonneCase);
+                if(casePossible!=null) {//si la case existe
+                    if(cases.get(casePossible)!=null){//si la case possède une pièce
+                        Piece p = cases.get(casePossible);//on récupère la pièce associée à la case
+                        if(p.getCouleur() != piece.getCouleur()){//si la pièce est de l'équipe adverse
+                            ligneCopie.add(coordonneCase);
+                            casePossible.setComportementCase(new CaseEnDanger());//je peux la manger
+                            break;
+                        }
+                    }else{//si la case est vide
+                        ligneCopie.add(coordonneCase);
+                        casePossible.setComportementCase(new CasePossible());
                     }
-                }else{//si la case est vide
-                    nouvelleZoneDeplacement.add(coordonneCase);
-                    casePossible.setComportementCase(new CasePossible());
                 }
             }
+            nouvelleZoneDeplacement.add(ligneCopie);
         }
         piece.setZoneRecalculee(nouvelleZoneDeplacement);//la pièce connait désormais ses nouvelles possibilitées de déplacement
     }
@@ -169,14 +174,16 @@ public class Plateau implements Sujet {
     //déplace une pièce sur une case du plateau
     public boolean deplacerPiece(Piece piece,Case ancienneCase,Case nouvelleCase){
         //vérifier si le déplacement est possible:
-        for(Integer[] coordonne : piece.getZoneRecalculee()){
-            if(Arrays.equals(coordonne,nouvelleCase.getPosition())){//si la case de destination se trouve dans la liste des déplacements possibles de la pièce
-                piece.setPositionNumber(nouvelleCase.getPosition());//la pièce adopte la position de la nouvelle case
-                cases.replace(nouvelleCase,piece);//on dépose la pièce sur la nouvelle case choisie
-                cases.replace(ancienneCase,null);//l'ancienne case devient vide
+        for(ArrayList<Integer[]> ligne : piece.getZoneRecalculee()) {
+            for (Integer[] coordonne : ligne) {
+                if (Arrays.equals(coordonne, nouvelleCase.getPosition())) {//si la case de destination se trouve dans la liste des déplacements possibles de la pièce
+                    piece.setPositionNumber(nouvelleCase.getPosition());//la pièce adopte la position de la nouvelle case
+                    cases.replace(nouvelleCase, piece);//on dépose la pièce sur la nouvelle case choisie
+                    cases.replace(ancienneCase, null);//l'ancienne case devient vide
 
-                this.reinitialiserCases();
-                return true;//déplacement ok
+                    this.reinitialiserCases();
+                    return true;//déplacement ok
+                }
             }
         }
         this.reinitialiserCases();
