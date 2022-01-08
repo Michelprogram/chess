@@ -127,31 +127,37 @@ public class Plateau implements Sujet {
     }
 
     //-------------------------------------------------------------------------
+    //réduit la zone de déplacement d'une pièce en fonction de la position des autres pièces sur le plateau
+    private void filterDeplacement(Piece piece){
+        ArrayList<Integer[]> zoneDeplacement = piece.zoneDeDeplacement();
+        ArrayList<Integer[]> nouvelleZoneDeplacement = new ArrayList<>();//copie affinée de la liste de déplacement
+
+        //System.out.println("Cases possibles : ");
+        for(Integer[] coordonneCase : zoneDeplacement){
+            //System.out.println(Arrays.toString(coordonneCase));
+            Case casePossible = this.getCase(coordonneCase);
+            if(casePossible!=null) {//si la case existe
+                if(cases.get(casePossible)!=null){//si la case possède une pièce
+                    Piece p = cases.get(casePossible);//on récupère la pièce associée à la case
+                    if(p.getCouleur() != piece.getCouleur()){//si la pièce est de l'équipe adverse
+                        nouvelleZoneDeplacement.add(coordonneCase);
+                        casePossible.setComportementCase(new CaseEnDanger());//je peux la manger
+                    }
+                }else{//si la case est vide
+                    nouvelleZoneDeplacement.add(coordonneCase);
+                    casePossible.setComportementCase(new CasePossible());
+                }
+            }
+        }
+        piece.setZoneRecalculee(nouvelleZoneDeplacement);//la pièce connait désormais ses nouvelles possibilitées de déplacement
+    }
     //sélectionne une pièce et met en surbrillance la zone de déplacement
     public Piece selectionnerPiece(Case caseSelectionnee){
         caseSelectionnee.setComportementCase(new CaseSelectionee());
         Piece pieceSelectionnee = this.getPiece(caseSelectionnee);
 
         if(pieceSelectionnee!=null){//si la pièce existe
-            ArrayList<Integer[]> zoneDeplacement = pieceSelectionnee.zoneDeDeplacement();//on récupère la zone de déplacement de la pièce
-            //System.out.println("Cases possibles : ");
-            for(Integer[] coordonneCase : zoneDeplacement){
-                //System.out.println(Arrays.toString(coordonneCase));
-                Case casePossible = this.getCase(coordonneCase);
-                if(casePossible!=null) {//si la case existe
-                    casePossible.setComportementCase(new CasePossible());
-                    //System.out.println("Case colorée : " + Arrays.toString(casePossible.getPosition()));
-                    if(cases.get(casePossible)!=null)//si la case possède une pièce
-                    {
-                        Piece p = cases.get(casePossible);//on récupère la pièce associée à la case
-                        if(p.getCouleur() == pieceSelectionnee.getCouleur()){//si la pièce est de mon équipe
-
-                        }else{
-                            casePossible.setComportementCase(new CaseEnDanger());
-                        }
-                    }
-                }
-            }
+            this.filterDeplacement(pieceSelectionnee);//on récupère la zone de déplacement de la pièce
         }
 
         this.notifierObs();//met à jour l'affichage
@@ -162,7 +168,7 @@ public class Plateau implements Sujet {
     public void deplacerPiece(Piece piece,Case ancienneCase,Case nouvelleCase){
         System.out.println("Case destination : " + Arrays.toString(nouvelleCase.getPosition()));
         //vérifier si le déplacement est possible:
-        for(Integer[] coordonne : piece.zoneDeDeplacement()){
+        for(Integer[] coordonne : piece.getZoneRecalculee()){
             if(Arrays.equals(coordonne,nouvelleCase.getPosition())){//si la case de destination se trouve dans la liste des déplacements possibles de la pièce
                 piece.setPositionNumber(nouvelleCase.getPosition());//la pièce adopte la position de la nouvelle case
                 cases.replace(nouvelleCase,piece);//on dépose la pièce sur la nouvelle case choisie

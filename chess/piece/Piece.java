@@ -17,7 +17,7 @@ public abstract class Piece {
     protected ArrayList<Integer[]> DEPLACEMENT_CROIX = new ArrayList(){{
         for(int i=-1;i>=-7;i--){add(new Integer[]{i,Math.abs(i)});}//ex : (-1;1)
         for(int i=1;i<=7;i++){add(new Integer[]{i,i});}
-        for(int i=-1;i>=-7;i--){add(new Integer[]{Math.abs(i),i});}//ex : (1
+        for(int i=-1;i>=-7;i--){add(new Integer[]{Math.abs(i),i});}//ex : (1;-1)
         for(int i=-1;i>=-7;i--){add(new Integer[]{i,i});}
     }};
     //------------------------------------------------------------------------------
@@ -27,7 +27,8 @@ public abstract class Piece {
     protected Boolean couleur;
     protected String couleurCharacter;
     protected Boolean menace;//maybe
-    protected ArrayList<Integer[]> zone;
+    protected ArrayList<Integer[]> zone;//zone de déplacement de la piece (sans prendre en compte la position des autres pièces)
+    protected ArrayList<Integer[]> zoneRecalculee;//zone de déplacement de la piece (tenant compte de la position des autres pièces)
 
 
     public Piece(Boolean couleur,Integer[] positionNumber) {
@@ -38,6 +39,7 @@ public abstract class Piece {
         this.positionNumber = positionNumber;
         this.menace = false;
         this.zone = new ArrayList<>();
+        this.zoneRecalculee = new ArrayList<>();
 
         numberToLetter();
     }
@@ -105,7 +107,7 @@ public abstract class Piece {
     }
 
     //-------------------------------------------------------------------------------------------
-    //Méthode qui se fait override par les classes enfants
+    //Méthode qui se fait override par certaines classes enfants, calcule la zone de déplacement
     public ArrayList<Integer[]> zoneDeDeplacement(){
         //on récupère la position de la pièce par rapport à la case (0;0)
         int deltaX = this.getAbscisse();
@@ -129,6 +131,14 @@ public abstract class Piece {
         return (ArrayList<Integer[]>) zone.stream()
                 .filter( el -> (el[0] >= 0 && el[0] < 8) && (el[1] >= 0 && el[1] < 8) )
                 .collect(Collectors.toList());
+    }
+
+    public ArrayList<Integer[]> getZoneRecalculee() {
+        return zoneRecalculee;
+    }
+
+    public void setZoneRecalculee(ArrayList<Integer[]> zoneRecalculee) {
+        this.zoneRecalculee = zoneRecalculee;
     }
 
     //Permet d'avoir des informations supplémentaires sur une pièce
