@@ -11,21 +11,33 @@ public class Gestionnaire {
     public static void main(String[] args){
         Plateau plateau = new Plateau();
         Affichage affichage = new Affichage(plateau);
+        Joueur daryl = new Joueur("Daryl","noir",plateau);
+        Joueur dorian = new Joueur("Dorian","blanc",plateau);
+        Joueur joueurCourant = dorian;
+
         Scanner sc = new Scanner(System.in);
-        String nomCase;
+        String nomCase; boolean deplacementOk;
 
         do{
             //test - obtention d'une case
             System.out.print("Entrer un nom de case : "); nomCase = sc.nextLine();
             Case caseSource = plateau.getCase(nomCase);
-            Piece pieceSelectionnee = plateau.selectionnerPiece(caseSource);
+            Piece pieceSelectionnee = plateau.selectionnerPiece(joueurCourant,caseSource);
 
-            System.out.print("Où voulez-vous déplacer la pièce ? : "); nomCase = sc.nextLine();
-            if(!nomCase.equals("c")){
-            Case caseDestination = plateau.getCase(nomCase);
-            plateau.deplacerPiece(pieceSelectionnee,caseSource,caseDestination);}
+            if(pieceSelectionnee!=null){
+                System.out.print("Où voulez-vous déplacer la pièce ? : "); nomCase = sc.nextLine();
+                if(!nomCase.equals("c")){
+                    Case caseDestination = plateau.getCase(nomCase);
+                    deplacementOk = plateau.deplacerPiece(pieceSelectionnee,caseSource,caseDestination);
 
-            plateau.reinitialiserCases();
+                    if(!deplacementOk)
+                        System.out.println("Impossible de déplacer la pièce");
+                }else{
+                    plateau.reinitialiserCases();
+                }
+            }else{
+                System.out.println("Impossible de sélectionner la pièce");
+            }
         }while(nomCase != "q");
     }
 }

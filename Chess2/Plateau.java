@@ -152,21 +152,22 @@ public class Plateau implements Sujet {
         piece.setZoneRecalculee(nouvelleZoneDeplacement);//la pièce connait désormais ses nouvelles possibilitées de déplacement
     }
     //sélectionne une pièce et met en surbrillance la zone de déplacement
-    public Piece selectionnerPiece(Case caseSelectionnee){
-        caseSelectionnee.setComportementCase(new CaseSelectionee());
+    public Piece selectionnerPiece(Joueur joueur,Case caseSelectionnee){
         Piece pieceSelectionnee = this.getPiece(caseSelectionnee);
-
         if(pieceSelectionnee!=null){//si la pièce existe
-            this.filterDeplacement(pieceSelectionnee);//on récupère la zone de déplacement de la pièce
+            if(pieceSelectionnee.getCouleur() == joueur.getCouleur()){//si la pièce appartient à l'équipe du joueur
+                caseSelectionnee.setComportementCase(new CaseSelectionee());
+                this.filterDeplacement(pieceSelectionnee);//on récupère la zone de déplacement de la pièce
+                this.notifierObs();//met à jour l'affichage
+                return pieceSelectionnee;
+            }
         }
-
-        this.notifierObs();//met à jour l'affichage
-        return pieceSelectionnee;
+        this.reinitialiserCases();
+        return null;
     }
 
     //déplace une pièce sur une case du plateau
-    public void deplacerPiece(Piece piece,Case ancienneCase,Case nouvelleCase){
-        System.out.println("Case destination : " + Arrays.toString(nouvelleCase.getPosition()));
+    public boolean deplacerPiece(Piece piece,Case ancienneCase,Case nouvelleCase){
         //vérifier si le déplacement est possible:
         for(Integer[] coordonne : piece.getZoneRecalculee()){
             if(Arrays.equals(coordonne,nouvelleCase.getPosition())){//si la case de destination se trouve dans la liste des déplacements possibles de la pièce
@@ -174,11 +175,12 @@ public class Plateau implements Sujet {
                 cases.replace(nouvelleCase,piece);//on dépose la pièce sur la nouvelle case choisie
                 cases.replace(ancienneCase,null);//l'ancienne case devient vide
 
-                this.reinitialiserCases();//on réinitialise les états des cases
-                return;
+                this.reinitialiserCases();
+                return true;//déplacement ok
             }
         }
-        System.out.println("Impossible de déplacer la pièce");
+        this.reinitialiserCases();
+        return false;//le déplacement ne s'est pas bien passé
     }
 
     //réinitialise l'état des cases
