@@ -8,12 +8,21 @@ import java.util.Arrays;
 //Knight
 //Déplacement en L
 public class Cavalier extends Piece {
+    //déplacement en L à partir de la case (0;0)
+    private ArrayList<Integer[]> DEPLACEMENT_L = new ArrayList(){{
+        add(new Integer[]{-2,1});add(new Integer[]{-1,2});
+        add(new Integer[]{1,2});add(new Integer[]{2,1});
+        add(new Integer[]{2,-1});add(new Integer[]{1,-2});
+        add(new Integer[]{-1,-2});add(new Integer[]{-2,-1});
+    }};
 
     public Cavalier(Boolean couleur, Integer[] position) {
         super(couleur, position);
         this.character = 'C';
+        zone.addAll(DEPLACEMENT_L);
     }
 
+    /*
     //Cherche les zones possible
     @Override
     public ArrayList<Integer[]> zoneDeDeplacement(){
@@ -59,5 +68,5 @@ public class Cavalier extends Piece {
         }
 
         return filterDeplacement(this.zone);
-    }
+    }*/
 }

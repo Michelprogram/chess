@@ -47,7 +47,7 @@ public class Affichage implements Observateur {
     public void afficher(){
         //coordonees lettres
         System.out.print("\n");
-        System.out.println(Couleur.ANSI_CYAN.getValue()+"  a    b     c     d     e     f     g     h  "+Couleur.ANSI_RESET.getValue());
+        System.out.println(Couleur.ANSI_CYAN.getValue()+"  a     b     c     d     e     f     g     h  "+Couleur.ANSI_RESET.getValue());
 
         int compteur = 0;
         for(Map.Entry<Case,Piece> entry : cases.entrySet()){
