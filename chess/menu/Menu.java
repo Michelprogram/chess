@@ -110,7 +110,7 @@ public class Menu {
                     if(!choiceCase.equals("c")){
 
                         caseDestination = plateau.getCase(choiceCase);
-                        deplacementIsOk = plateau.deplacerPiece(pieceSelectionnee,caseSource,caseDestination);
+                        deplacementIsOk = plateau.deplacerPiece(currentPlayer,pieceSelectionnee,caseSource,caseDestination);
 
                         if(!deplacementIsOk)
                             System.out.println("Le déplacement de la pièce est impossible.");
@@ -119,7 +119,7 @@ public class Menu {
                         }
 
                     }else{
-                        plateau.reinitialiserCases();
+                        plateau.reinitialiserCases(true);
                         deplacementIsOk = true;
                     }
 

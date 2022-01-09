@@ -49,7 +49,7 @@ public class Plateau implements Sujet {
         for (int i = 0; i < 8; i++) {
             String lettre = Convertisseur.toLetter(i);
             Piece pion = factoryPiece.noire("Pion");
-            cases.put(new Case(lettre + "2", new Integer[]{1, i}), null);
+            cases.put(new Case(lettre + "2", new Integer[]{1, i}), pion);
         }
 
         //--4 rangées vides au centre du plateau
@@ -66,7 +66,7 @@ public class Plateau implements Sujet {
         for (int i = 0; i < 8; i++) {
             String lettre = Convertisseur.toLetter(i);
             Piece pion = factoryPiece.blanche("Pion");
-            cases.put(new Case(lettre + "7", new Integer[]{6, i}), null);
+            cases.put(new Case(lettre + "7", new Integer[]{6, i}), pion);
         }
 
         //--dernière rangée pièces blanches

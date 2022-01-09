@@ -28,12 +28,12 @@ public class Gestionnaire {
                 System.out.print("Où voulez-vous déplacer la pièce ? : "); nomCase = sc.nextLine();
                 if(!nomCase.equals("c")){
                     Case caseDestination = plateau.getCase(nomCase);
-                    deplacementOk = plateau.deplacerPiece(pieceSelectionnee,caseSource,caseDestination);
+                    deplacementOk = plateau.deplacerPiece(joueurCourant,pieceSelectionnee,caseSource,caseDestination);
 
                     if(!deplacementOk)
                         System.out.println("Impossible de déplacer la pièce");
                 }else{
-                    plateau.reinitialiserCases();
+                    plateau.reinitialiserCases(true);
                 }
             }else{
                 System.out.println("Impossible de sélectionner la pièce");
