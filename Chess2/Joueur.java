@@ -10,11 +10,17 @@ public class Joueur {
     public Joueur(String nom,String couleur,Plateau plateau){
         this.nom = nom;
         this.plateau = plateau;
-        if(couleur=="blanc") this.couleur = true;
-        else if(couleur=="noir") this.couleur = false;
+
+        this.couleur = couleur.equals("blanc");
+
     }
 
     public boolean getCouleur(){
         return this.couleur;
+    }
+
+    @Override
+    public String toString(){
+        return nom + " couleur " + (couleur ? "blanc" : "noir");
     }
 }
