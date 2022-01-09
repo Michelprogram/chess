@@ -49,7 +49,7 @@ public class Plateau implements Sujet {
         for (int i = 0; i < 8; i++) {
             String lettre = Convertisseur.toLetter(i);
             Piece pion = factoryPiece.noire("Pion");
-            cases.put(new Case(lettre + "2", new Integer[]{1, i}), pion);
+            cases.put(new Case(lettre + "2", new Integer[]{1, i}), null);
         }
 
         //--4 rangées vides au centre du plateau
@@ -66,7 +66,7 @@ public class Plateau implements Sujet {
         for (int i = 0; i < 8; i++) {
             String lettre = Convertisseur.toLetter(i);
             Piece pion = factoryPiece.blanche("Pion");
-            cases.put(new Case(lettre + "7", new Integer[]{6, i}), pion);
+            cases.put(new Case(lettre + "7", new Integer[]{6, i}), null);
         }
 
         //--dernière rangée pièces blanches
@@ -182,15 +182,17 @@ public class Plateau implements Sujet {
             for (Integer[] coordonne : ligne) {
                 if (Arrays.equals(coordonne, nouvelleCase.getPosition())) {//si la case de destination se trouve dans la liste des déplacements possibles de la pièce
                     piece.setPositionNumber(nouvelleCase.getPosition());//la pièce adopte la position de la nouvelle case
+                    cases.replace(ancienneCase, null);//l'ancienne case devient vide
+                    Piece pieceMangee = this.getPiece(nouvelleCase);//on sauvegarde temporairement la pièce mangée
+                    cases.replace(nouvelleCase, piece);//on dépose la pièce sur la nouvelle case choisie
 
                     //on vérifie si le déplacement ne met pas le roi en échec
                     boolean roiEnEchec = this.checkEchec(joueur);
                     if(roiEnEchec){
                         piece.setPositionNumber(ancienneCase.getPosition());//on annule le déplacement
+                        cases.replace(nouvelleCase, pieceMangee);
+                        cases.replace(ancienneCase, piece);
                         System.out.println("Déplacement impossible : roi en échec");
-                    }else{
-                        cases.replace(nouvelleCase, piece);//on dépose la pièce sur la nouvelle case choisie
-                        cases.replace(ancienneCase, null);//l'ancienne case devient vide
                     }
 
                     this.reinitialiserCases(true);
@@ -222,8 +224,8 @@ public class Plateau implements Sujet {
                     //System.out.println(Arrays.toString(p.getPositionNumber()));
                     return true;//le roi est en échec
                 }
-                this.reinitialiserCases(false);
             }
+            this.reinitialiserCases(false);
         }
         return false;
     }
