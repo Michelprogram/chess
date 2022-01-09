@@ -98,7 +98,7 @@ public abstract class Piece {
         this.couleur = couleur;
     }
 
-    public Boolean getMenace() {
+    public Boolean isMenace() {
         return menace;
     }
 

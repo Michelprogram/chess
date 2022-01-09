@@ -3,23 +3,24 @@ package Chess2;
 import chess.cases.*;
 import chess.piece.FactoryPiece;
 import chess.piece.Piece;
+import chess.piece.pieces.Roi;
 
 import java.util.*;
 
 public class Plateau implements Sujet {
     private List<Observateur> observateurs;
-    private List<Piece> pieces;
+    //private List<Piece> pieces;
     private Map<Case,Piece> cases;
 
     public Plateau(){
         this.observateurs = new ArrayList<>();
-        this.pieces = new ArrayList<>(32);//le plateau contient 32 pièces au début de la partie
+        //this.pieces = new ArrayList<>(32);//le plateau contient 32 pièces au début de la partie
         this.cases = new LinkedHashMap<>(64);//le plateau contient 64 cases
         this.initPlateau();
 
-        for(Piece p : cases.values()){
+        /*for(Piece p : cases.values()){
             if(p!=null) pieces.add(p);
-        }
+        }*/
     }
 
     private void initPlateau() {
@@ -143,10 +144,11 @@ public class Plateau implements Sujet {
                         Piece p = cases.get(casePossible);//on récupère la pièce associée à la case
                         if(p.getCouleur() != piece.getCouleur()){//si la pièce est de l'équipe adverse
                             ligneCopie.add(coordonneCase);
-                            casePossible.setComportementCase(new CaseEnDanger());//je peux la manger
+                            casePossible.setComportementCase(new CaseEnDanger());
+                            p.setMenace(true);//je peux la manger
                             break;
                         }else{//si la pièce est de mon équipe
-                            break;//je m'arrête devant celle-ci
+                            break;//je m'arrête devant celle-ci et je ne l'ajoute pas à la liste des cases possibles
                         }
                     }else{//si la case est vide
                         ligneCopie.add(coordonneCase);
@@ -169,35 +171,74 @@ public class Plateau implements Sujet {
                 return pieceSelectionnee;
             }
         }
-        this.reinitialiserCases();
+        this.reinitialiserCases(true);
         return null;
     }
 
     //déplace une pièce sur une case du plateau
-    public boolean deplacerPiece(Piece piece,Case ancienneCase,Case nouvelleCase){
+    public boolean deplacerPiece(Joueur joueur,Piece piece,Case ancienneCase,Case nouvelleCase){
         //vérifier si le déplacement est possible:
         for(ArrayList<Integer[]> ligne : piece.getZoneRecalculee()) {
             for (Integer[] coordonne : ligne) {
                 if (Arrays.equals(coordonne, nouvelleCase.getPosition())) {//si la case de destination se trouve dans la liste des déplacements possibles de la pièce
                     piece.setPositionNumber(nouvelleCase.getPosition());//la pièce adopte la position de la nouvelle case
-                    cases.replace(nouvelleCase, piece);//on dépose la pièce sur la nouvelle case choisie
-                    cases.replace(ancienneCase, null);//l'ancienne case devient vide
 
-                    this.reinitialiserCases();
+                    //on vérifie si le déplacement ne met pas le roi en échec
+                    boolean roiEnEchec = this.checkEchec(joueur);
+                    if(roiEnEchec){
+                        piece.setPositionNumber(ancienneCase.getPosition());//on annule le déplacement
+                        System.out.println("Déplacement impossible : roi en échec");
+                    }else{
+                        cases.replace(nouvelleCase, piece);//on dépose la pièce sur la nouvelle case choisie
+                        cases.replace(ancienneCase, null);//l'ancienne case devient vide
+                    }
+
+                    this.reinitialiserCases(true);
                     return true;//déplacement ok
                 }
             }
         }
-        this.reinitialiserCases();
+        this.reinitialiserCases(true);
         return false;//le déplacement ne s'est pas bien passé
     }
 
-    //réinitialise l'état des cases
-    public void reinitialiserCases(){
-        for(Case c : cases.keySet()){
-            c.setComportementCase(new CaseNormale());
+    //vérifie si le roi est en échec après un potentiel déplacement
+    public boolean checkEchec(Joueur joueur){
+        //on détermine quel roi surveiller en fonction de l'équipe du joueur
+        Piece roi = null;
+        for(Piece p : this.cases.values()){
+            if(p!=null){
+                if(p instanceof Roi && p.getCouleur() == joueur.getCouleur()){
+                    roi = p;
+                }
+            }
         }
-        this.notifierObs();//met à jour l'affichage
+
+        //on vérifie si le roi est en danger
+        for(Piece p : this.cases.values()){
+            if(p!=null && p.getCouleur()!=joueur.getCouleur()){//pour toutes les pièces adverses
+                this.filterDeplacement(p);//détermine quelles pièces deviennent menacées
+                if(roi.isMenace()){
+                    //System.out.println(Arrays.toString(p.getPositionNumber()));
+                    return true;//le roi est en échec
+                }
+                this.reinitialiserCases(false);
+            }
+        }
+        return false;
+    }
+
+    //réinitialise l'état des cases et des pièces
+    public void reinitialiserCases(boolean updateAffichage){
+        for(Map.Entry<Case,Piece> entry : cases.entrySet()){
+            Case c = entry.getKey();
+            Piece p = entry.getValue();
+            c.setComportementCase(new CaseNormale());
+            if(p!=null)//Si la pièce existe
+                p.setMenace(false);
+        }
+        if(updateAffichage)
+            this.notifierObs();//met à jour l'affichage
     }
     //----------------------observateur----------------------------
     @Override
