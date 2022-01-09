@@ -13,7 +13,7 @@ public class Gestionnaire {
         Affichage affichage = new Affichage(plateau);
         Joueur daryl = new Joueur("Daryl","noir",plateau);
         Joueur dorian = new Joueur("Dorian","blanc",plateau);
-        Joueur joueurCourant = dorian;
+        Joueur joueurCourant = daryl;
 
         Scanner sc = new Scanner(System.in);
         String nomCase; boolean deplacementOk;

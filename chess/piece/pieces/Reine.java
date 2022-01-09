@@ -11,8 +11,8 @@ public class Reine extends Piece {
     public Reine(Boolean couleur,Integer[] position){
         super(couleur, position);
         this.character = 'Q';
-        this.zone.addAll(DEPLACEMENT_LIGNE);
         this.zone.addAll(DEPLACEMENT_CROIX);
+        this.zone.addAll(DEPLACEMENT_LIGNE);
     }
 
     //Le déplacement de la reine combine le fou et tour, on crée un fou et une tour pour reprendre leur zone de

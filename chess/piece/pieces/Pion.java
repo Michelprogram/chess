@@ -2,6 +2,7 @@ package chess.piece.pieces;
 
 import chess.piece.Piece;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -17,33 +18,47 @@ public class Pion extends Piece {
         this.character = 'P';
         premierTour = true;
     }
-/*
+
     @Override
-    public ArrayList<Integer[]> zoneDeDeplacement() {
+    public ArrayList<ArrayList<Integer[]>> zoneDeDeplacement() {
         cleanZone();
 
         //Premier tour peut aller de 2 cases en avant
         if(premierTour){
-            for (int i = 0; i < 2; i++) {
+            ArrayList<Integer[]> tempList = new ArrayList();
+            for (int i = 1; i < 3; i++) {
                 Integer[] tempo = new Integer[2];
 
                 tempo[0] = getCouleur() ? getOrdonnee() - i: getOrdonnee() + i;
                 tempo[1] = getAbscisse();
-
-                this.zone.add(Arrays.copyOf(tempo, 2));
+                tempList.add(Arrays.copyOf(tempo, 2));
             }
-
+            this.zone.add(tempList);
             premierTour = false;
         }
         //Si un pion adverse en diagonale peut le manger
         //Second tour peut se déplacer d'une case en avant
         else{
-            this.zone.add(new Integer[]{
-                    getCouleur() ? getOrdonnee() - 1 : getOrdonnee() + 1,
-                    getAbscisse()
-            });
+            this.zone.add(new ArrayList(){{
+                add(new Integer[]{
+                        getCouleur() ? getOrdonnee() - 1 : getOrdonnee() + 1,
+                        getAbscisse()
+                });
+            }});
         }
 
-        return filterDeplacement(this.zone);
-    }*/
+        //filtrage de la zone
+        ArrayList<ArrayList<Integer[]>> zoneDeplacementCopie = new ArrayList<>();//copie de la zone de déplacement
+        for(ArrayList<Integer[]> ligne : zone){
+            ArrayList<Integer[]> ligneCopie = new ArrayList<>();
+            for(Integer[] coordonne : ligne){
+                int nouvelAbcisse = coordonne[1];
+                int nouvelleOrdonnee = coordonne[0];
+                if((nouvelAbcisse >= 0 && nouvelAbcisse < 8) && (nouvelleOrdonnee >= 0 && nouvelleOrdonnee < 8))//filtrage de la zone
+                    ligneCopie.add(new Integer[]{nouvelleOrdonnee,nouvelAbcisse});
+            }
+            zoneDeplacementCopie.add(ligneCopie);
+        }
+        return zoneDeplacementCopie;
+    }
 }

@@ -145,6 +145,8 @@ public class Plateau implements Sujet {
                             ligneCopie.add(coordonneCase);
                             casePossible.setComportementCase(new CaseEnDanger());//je peux la manger
                             break;
+                        }else{//si la pièce est de mon équipe
+                            break;//je m'arrête devant celle-ci
                         }
                     }else{//si la case est vide
                         ligneCopie.add(coordonneCase);

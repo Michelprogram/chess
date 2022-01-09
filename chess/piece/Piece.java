@@ -107,7 +107,7 @@ public abstract class Piece {
     }
 
     //-------------------------------------------------------------------------------------------
-    //Méthode qui se fait override par certaines classes enfants, calcule la zone de déplacement
+    //Méthode qui se fait override par la classe Pion, calcule la zone de déplacement
     public ArrayList<ArrayList<Integer[]>> zoneDeDeplacement(){
         //on récupère la position de la pièce par rapport à la case (0;0)
         int deltaX = this.getAbscisse();
