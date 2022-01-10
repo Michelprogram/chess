@@ -182,6 +182,7 @@ public class Plateau implements Sujet {
                 directionAbscisse = 1;
             }
         }
+
         piece.setZoneRecalculee(nouvelleZoneDeplacement);//la pièce connait désormais ses nouvelles possibilitées de déplacement
     }
 
