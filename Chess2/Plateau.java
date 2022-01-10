@@ -217,7 +217,9 @@ public class Plateau implements Sujet {
                         piece.setPositionNumber(ancienneCase.getPosition());//on annule le déplacement
                         cases.replace(nouvelleCase, pieceMangee);
                         cases.replace(ancienneCase, piece);
-                        System.out.println("Déplacement impossible : roi en échec");
+                        //this.reinitialiserCases(true);
+                        System.out.print("Roi en échec !");
+                        return false;//déplacement nok
                     }
 
                     this.reinitialiserCases(true);
