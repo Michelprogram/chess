@@ -12,11 +12,25 @@ public class Pion extends Piece {
 
     //Le pion change de possibilité de déplacement au second tour
     private boolean premierTour;
+    private int direction;
 
     public Pion(Boolean couleur, Integer[] position) {
         super(couleur, position);
         this.character = 'P';
         premierTour = true;
+        this.direction = couleur ? -1 : 1;//-1=vers le haut, 1=vers le bas
+    }
+
+    public int getDirection() {
+        return direction;
+    }
+
+    public boolean isPremierTour(){
+        return this.premierTour;
+    }
+
+    public void setPremierTour(boolean premierTour){
+        this.premierTour = premierTour;
     }
 
     @Override
@@ -25,20 +39,19 @@ public class Pion extends Piece {
 
         //Premier tour peut aller de 2 cases en avant
         if(premierTour){
+            premierTour = false;
             ArrayList<Integer[]> tempList = new ArrayList();
             for (int i = 1; i < 3; i++) {
                 Integer[] tempo = new Integer[2];
 
-                tempo[0] = getCouleur() ? getOrdonnee() - i: getOrdonnee() + i;
+                tempo[0] = getOrdonnee()+(i*this.direction);
                 tempo[1] = getAbscisse();
                 tempList.add(Arrays.copyOf(tempo, 2));
             }
             this.zone.add(tempList);
-            premierTour = false;
         }
-        //Si un pion adverse en diagonale peut le manger
-        //Second tour peut se déplacer d'une case en avant
-        else{
+        else
+        {//Second tour peut se déplacer d'une case en avant
             this.zone.add(new ArrayList(){{
                 add(new Integer[]{
                         getCouleur() ? getOrdonnee() - 1 : getOrdonnee() + 1,

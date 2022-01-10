@@ -3,6 +3,7 @@ package Chess2;
 import chess.cases.*;
 import chess.piece.FactoryPiece;
 import chess.piece.Piece;
+import chess.piece.pieces.Pion;
 import chess.piece.pieces.Roi;
 
 import java.util.*;
@@ -219,7 +220,16 @@ public class Plateau implements Sujet {
         //on vérifie si le roi est en danger
         for(Piece p : this.cases.values()){
             if(p!=null && p.getCouleur()!=joueur.getCouleur()){//pour toutes les pièces adverses
-                this.filterDeplacement(p);//détermine quelles pièces deviennent menacées
+                if(p instanceof Pion){
+                    Pion pion = (Pion)p;
+                    if(pion.isPremierTour()){//si le pion n'a pas encore joué
+                        this.filterDeplacement(pion);//détermine quelles pièces deviennent menacées
+                        pion.setPremierTour(true);//on fait comme si le pion n'avait pas bougé
+                    }
+                }else{
+                    this.filterDeplacement(p);
+                }
+
                 if(roi.isMenace()){
                     //System.out.println(Arrays.toString(p.getPositionNumber()));
                     return true;//le roi est en échec
