@@ -143,7 +143,7 @@ public class Plateau implements Sujet {
                 if(casePossible!=null) {//si la case existe
                     if(cases.get(casePossible)!=null){//si la case possède une pièce
                         Piece p = cases.get(casePossible);//on récupère la pièce associée à la case
-                        if(p.getCouleur() != piece.getCouleur()){//si la pièce est de l'équipe adverse
+                        if((p.getCouleur() != piece.getCouleur()) && !(piece instanceof Pion)){//si la pièce est de l'équipe adverse && que je ne suis pas un pion
                             ligneCopie.add(coordonneCase);
                             casePossible.setComportementCase(new CaseEnDanger());
                             p.setMenace(true);//je peux la manger
@@ -159,8 +159,32 @@ public class Plateau implements Sujet {
             }
             nouvelleZoneDeplacement.add(ligneCopie);
         }
+
+        //algo pour le pion, pour qu'il puisse manger en diagonale
+        if(piece instanceof Pion){
+            Pion pion = (Pion)piece;
+            int directionAbscisse = -1;
+
+            for(int i=0;i<=1;i++){
+                //on récupère une case à la diagonale du pion
+                Case casePionDiagonale = getCase(new Integer[]{pion.getOrdonnee()+pion.getDirection(),pion.getAbscisse()+directionAbscisse});
+                if(casePionDiagonale!=null && cases.get(casePionDiagonale)!=null)//si la case est sur le plateau && si la case possède une pièce
+                {
+                    Piece p = cases.get(casePionDiagonale);//on récupère la pièce située à la diagonale du pion
+                    if(p.getCouleur() != pion.getCouleur()){//si cette pièce est du camp adverse
+                        p.setMenace(true);//je peux la manger
+                        casePionDiagonale.setComportementCase(new CaseEnDanger());//on ajoute cette case à la zone de déplacement
+                        nouvelleZoneDeplacement.add(new ArrayList<Integer[]>(){{
+                            add(casePionDiagonale.getPosition());
+                        }});
+                    }
+                }
+                directionAbscisse = 1;
+            }
+        }
         piece.setZoneRecalculee(nouvelleZoneDeplacement);//la pièce connait désormais ses nouvelles possibilitées de déplacement
     }
+
     //sélectionne une pièce et met en surbrillance la zone de déplacement
     public Piece selectionnerPiece(Joueur joueur,Case caseSelectionnee){
         Piece pieceSelectionnee = this.getPiece(caseSelectionnee);
