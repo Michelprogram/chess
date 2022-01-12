@@ -123,7 +123,8 @@ public abstract class Piece {
                 if((nouvelAbcisse >= 0 && nouvelAbcisse < 8) && (nouvelleOrdonnee >= 0 && nouvelleOrdonnee < 8))//filtrage de la zone
                     ligneCopie.add(new Integer[]{nouvelleOrdonnee,nouvelAbcisse});
             }
-            zoneDeplacementCopie.add(ligneCopie);
+            if(!ligneCopie.isEmpty())
+                zoneDeplacementCopie.add(ligneCopie);
         }
         return zoneDeplacementCopie;
     }

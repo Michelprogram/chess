@@ -2,6 +2,7 @@ package chess.piece;
 
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -14,12 +15,18 @@ class PieceTest {
     private final Piece roiBlanc = factory.blanche("Roi");
     private final Piece roiNoir = factory.noire("Roi");
 
-    public void AssertBetweenArray(ArrayList<Integer[]> tab1, ArrayList<Integer[]> tab2){
+    public void AssertBetweenArray(ArrayList<ArrayList<Integer[]>> tab1, ArrayList<ArrayList<Integer[]>> tab2){
         for (int i = 0; i < tab1.size(); i++) {
-            Integer[] element1 = tab1.get(i);
-            Integer[] element2 = tab2.get(i);
+            ArrayList<Integer[]> arr1 = tab1.get(i);
+            ArrayList<Integer[]> arr2 = tab2.get(i);
 
-            assertArrayEquals(element1, element2);
+            for (int j = 0; j < arr1.size(); j++) {
+                Integer[] element1 = arr1.get(j);
+                Integer[] element2 = arr2.get(j);
+
+
+                assertArrayEquals(element1, element2);
+            }
         }
     }
 
@@ -52,49 +59,41 @@ class PieceTest {
         }};
 
         ArrayList<ArrayList<Integer[]>> zone = roiNoir.zoneDeDeplacement();
-        for(ArrayList<Integer[]> ligne : zone){
-            for(Integer[] c : ligne){
-                System.out.println(Arrays.toString(c));
-            }
-        }
 
-        assertArrayEquals(attendu.toArray(), zone.toArray());
+        AssertBetweenArray(zone,attendu);
 
     }
-/*
+
     //Déplacement de la tour horizontale et verticale aussi bien devant que derrière
     @Test
     public void deplacementTour() throws Exception{
+        ArrayList<ArrayList<Integer[]>> attendu = new ArrayList(){{
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{1,1});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{0,1});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{2,2});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{2,3});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{2,4});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{2,5});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{2,6});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{2,7});}});
 
-        ArrayList<Integer[]> attendu = new ArrayList<Integer[]>(){
-                {
-                    //Axe horizontale
-                    add(new Integer[]{2, 0});
-                    add(new Integer[]{2, 2});
-                    add(new Integer[]{2, 3});
-                    add(new Integer[]{2, 4});
-                    add(new Integer[]{2, 5});
-                    add(new Integer[]{2, 6});
-                    add(new Integer[]{2, 7});
-                    add(new Integer[]{2, 8});
-
-                    //Axe verticale
-                    add(new Integer[]{0, 1});
-                    add(new Integer[]{1, 1});
-                    add(new Integer[]{3, 1});
-                    add(new Integer[]{4, 1});
-                    add(new Integer[]{5, 1});
-                    add(new Integer[]{6, 1});
-                    add(new Integer[]{7, 1});
-                    add(new Integer[]{8, 1});
-
-                }
-        };
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{3,1});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{4,1});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{5,1});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{6,1});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{7,1});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{2,0});}});
+        }};
 
         Piece tour = factory.noire("Tour");
         tour.setPositionNumber(new Integer[]{ 2, 1});
 
-        ArrayList<Integer[]> zone = tour.zoneDeDeplacement();
+        ArrayList<ArrayList<Integer[]>> zone = tour.zoneDeDeplacement();
+        for(ArrayList<Integer[]> arr : zone){
+            for(Integer[] c : arr){
+                System.out.println(Arrays.toString(c));
+            }
+        }
 
         AssertBetweenArray(attendu, zone);
 
@@ -103,38 +102,30 @@ class PieceTest {
     //Déplacement du fou en diagonale aussi bien devant que derrière
     @Test
     public void deplacementFou() throws Exception{
+        ArrayList<ArrayList<Integer[]>> attendu = new ArrayList(){{
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{0,0});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{0,6});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{1,1});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{1,5});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{2,2});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{2,4});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{4,4});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{4,2});}});
 
-        ArrayList<Integer[]> attendu = new ArrayList<Integer[]>(){
-            {
-                add(new Integer[]{0,0});
-                add(new Integer[]{0,6});
-
-                add(new Integer[]{1,1});
-                add(new Integer[]{1,5});
-
-                add(new Integer[]{2,2});
-                add(new Integer[]{2,4});
-
-                add(new Integer[]{4,4});
-                add(new Integer[]{4,2});
-
-                add(new Integer[]{5,5});
-                add(new Integer[]{5,1});
-
-                add(new Integer[]{6,6});
-                add(new Integer[]{6,0});
-
-                add(new Integer[]{7,7});
-
-                add(new Integer[]{8,8});
-            }
-        };
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{5,5});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{5,1});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{5,1});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{6,6});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{6,0});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{7,7});}});
+            add(new ArrayList<Integer[]>(){{add(new Integer[]{8,8});}});
+        }};
 
         Piece fou = factory.blanche("Fou");
 
         fou.setPositionNumber(new Integer[]{3 , 3});
 
-        ArrayList<Integer[]> zone = fou.zoneDeDeplacement();
+        ArrayList<ArrayList<Integer[]>> zone = fou.zoneDeDeplacement();
 
         AssertBetweenArray(attendu, zone);
 
@@ -145,16 +136,21 @@ class PieceTest {
     @Test
     public void deplacementPion() throws Exception{
 
-        ArrayList<Integer[]> attendu = new ArrayList<Integer[]>(){
+        ArrayList<ArrayList<Integer[]>> attendu = new ArrayList(){
             {
-                add(new Integer[]{6,0});
-                add(new Integer[]{5,0});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{5,0});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{4,0});}});
             }
         };
 
         Piece pion = factory.blanche("Pion");
 
-        ArrayList<Integer[]> zone = pion.zoneDeDeplacement();
+        ArrayList<ArrayList<Integer[]>> zone = pion.zoneDeDeplacement();
+        for(ArrayList<Integer[]> arr : zone){
+            for(Integer[] c : arr){
+                System.out.println(Arrays.toString(c));
+            }
+        }
 
         AssertBetweenArray(attendu, zone);
 
@@ -164,9 +160,9 @@ class PieceTest {
     @Test
     public void deplacementPion2() throws Exception{
 
-        ArrayList<Integer[]> attendu = new ArrayList<Integer[]>(){
+        ArrayList<ArrayList<Integer[]>> attendu = new ArrayList(){
             {
-                add(new Integer[]{5,0});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{5,0});}});
             }
         };
 
@@ -175,7 +171,7 @@ class PieceTest {
         //Joue son premier tour
         pion.zoneDeDeplacement();
 
-        ArrayList<Integer[]> zone = pion.zoneDeDeplacement();
+        ArrayList<ArrayList<Integer[]>> zone = pion.zoneDeDeplacement();
 
         AssertBetweenArray(attendu, zone);
 
@@ -185,17 +181,17 @@ class PieceTest {
     @Test
     public void deplacementCavalier() throws Exception{
 
-        ArrayList<Integer[]> attendu = new ArrayList<Integer[]>(){
+        ArrayList<ArrayList<Integer[]>> attendu = new ArrayList(){
             {
-                add(new Integer[]{5,0});
-                add(new Integer[]{5,2});
-                add(new Integer[]{6,3});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{5,0});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{5,2});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{6,3});}});
             }
         };
 
         Piece cavalier = factory.blanche("Cavalier");
 
-        ArrayList<Integer[]> zone = cavalier.zoneDeDeplacement();
+        ArrayList<ArrayList<Integer[]>> zone = cavalier.zoneDeDeplacement();
 
         AssertBetweenArray(attendu, zone);
 
@@ -204,44 +200,44 @@ class PieceTest {
     //Déplacement de la reine, qui combine les déplacements du cavalier et du fou
     @Test
     public void deplacementReine() throws Exception{
-
-        ArrayList<Integer[]> attendu = new ArrayList<Integer[]>(){
+        ArrayList<ArrayList<Integer[]>> attendu = new ArrayList(){
             {
-                add(new Integer[]{3,0});
-                add(new Integer[]{3,8});
-                add(new Integer[]{4,1});
-                add(new Integer[]{4, 7});
-                add(new Integer[]{5, 2});
-                add(new Integer[]{5, 6});
-                add(new Integer[]{6, 3});
-                add(new Integer[]{6, 5});
-                add(new Integer[]{8, 5});
-                add(new Integer[]{8, 3});
-                add(new Integer[]{7, 0});
-                add(new Integer[]{7, 1});
-                add(new Integer[]{7, 2});
-                add(new Integer[]{7, 3});
-                add(new Integer[]{7, 5});
-                add(new Integer[]{7, 6});
-                add(new Integer[]{7, 7});
-                add(new Integer[]{7, 8});
-                add(new Integer[]{0, 4});
-                add(new Integer[]{1, 4});
-                add(new Integer[]{2, 4});
-                add(new Integer[]{3, 4});
-                add(new Integer[]{4, 4});
-                add(new Integer[]{5, 4});
-                add(new Integer[]{6, 4});
-                add(new Integer[]{8, 4});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{3,0});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{3,8});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{4,1});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{4,7});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{5,2});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{5,6});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{6,3});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{6,5});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{8,5});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{8,3});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{7,0});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{7,1});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{7,2});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{7,3});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{7,5});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{7,6});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{7,7});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{7,8});}});
+
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{0,4});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{1,4});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{2,4});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{3,4});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{4,4});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{5,4});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{6,4});}});
+                add(new ArrayList<Integer[]>(){{add(new Integer[]{8,4});}});
             }
         };
 
         Piece reine = factory.blanche("Reine");
 
-        ArrayList<Integer[]> zone = reine.zoneDeDeplacement();
+        ArrayList<ArrayList<Integer[]>> zone = reine.zoneDeDeplacement();
 
         AssertBetweenArray(attendu, zone);
 
-    }*/
+    }
 
 }

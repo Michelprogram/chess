@@ -4,6 +4,7 @@ import chess.piece.pieces.Reine;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,13 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class FactoryPieceTest{
 
     private final FactoryPiece factoryPiece = new FactoryPiece();
-
-    //Si la création de la pièce est bonne
-    @Test
-    public void InstanceOf() throws Exception{
-        assertTrue(factoryPiece.blanche("Roi") instanceof Piece);
-        assertFalse(factoryPiece.blanche("Roi") instanceof Reine);
-    }
 
     //Si les coordonnées sont bons après plusieurs instanciations d'une même pièce de la même couleur
     @Test
@@ -33,6 +27,13 @@ class FactoryPieceTest{
         assertArrayEquals(p1.getPositionNumber(), position1);
         assertArrayEquals(p2.getPositionNumber(), position2);
 
+    }
+
+    //Si la création de la pièce est bonne
+    @Test
+    public void InstanceOf() throws Exception{
+        assertTrue(factoryPiece.blanche("Roi") instanceof Piece);
+        assertFalse(factoryPiece.blanche("Roi") instanceof Reine);
     }
 
     //Si les coordonnées des pièces blanches sont cohérentes
