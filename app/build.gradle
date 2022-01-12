@@ -39,10 +39,6 @@ jar {
     }
 }
 
-task runApplication{
-    build -x test
-}
-
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
