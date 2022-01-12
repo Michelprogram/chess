@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import echec.pattern.chess.piece.pieces.Reine;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,8 +17,8 @@ class FactoryPieceTest{
     @Test
     public void position() throws Exception{
 
-        Integer[] position1 = new Integer[]{6, 0};
-        Integer[] position2 = new Integer[]{6, 1};
+        Integer[] position1 = new Integer[]{6, 16};
+        Integer[] position2 = new Integer[]{6, 17};
 
 
         Piece p1 = factoryPiece.blanche("Pion");

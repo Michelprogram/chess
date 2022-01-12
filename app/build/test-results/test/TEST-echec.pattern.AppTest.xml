@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="echec.pattern.AppTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-01-12T19:42:49" hostname="impostor.home" time="0.033">
-  <properties/>
-  <testcase name="coordonnesLetter()" classname="echec.pattern.AppTest" time="0.026"/>
-  <testcase name="appHasAGreeting()" classname="echec.pattern.AppTest" time="0.005"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

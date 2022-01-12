@@ -26,7 +26,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'echec.pattern.App'
+    mainClass = 'echec.pattern.chess.menu.Menu'
 }
 
 tasks.named('test') {
