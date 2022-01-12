@@ -4,6 +4,7 @@ import echec.pattern.chess.plateau.*;
 
 import echec.pattern.chess.cases.Case;
 import echec.pattern.chess.piece.Piece;
+import echec.pattern.chess.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -45,6 +46,7 @@ public class Menu {
                 quitter();
                 break;
             default:
+                Utils.resetTerminal();
                 System.out.println("Choisir un nombre entre 1 et 3.");
                 start();
                 break;
@@ -70,6 +72,7 @@ public class Menu {
             joueurs.add(creationJoueur(i));
         }
 
+        Utils.resetTerminal();
         this.affichage = new Affichage(plateau);
 
 

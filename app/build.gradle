@@ -24,9 +24,23 @@ dependencies {
     implementation 'com.google.guava:guava:30.1.1-jre'
 }
 
+run {
+    standardInput = System.in
+}
+
 application {
     // Define the main class for the application.
     mainClass = 'echec.pattern.chess.menu.Menu'
+}
+
+jar {
+    manifest {
+        attributes('Main-Class': 'echec.pattern.chess.menu.Menu')
+    }
+}
+
+task runApplication{
+    build -x test
 }
 
 tasks.named('test') {

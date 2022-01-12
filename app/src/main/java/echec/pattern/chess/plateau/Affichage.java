@@ -7,6 +7,7 @@ import echec.pattern.chess.piece.Piece;
 import echec.pattern.chess.observer.Observateur;
 
 import echec.pattern.chess.utils.Couleur;
+import echec.pattern.chess.utils.Utils;
 
 
 import java.util.Map;
@@ -30,24 +31,10 @@ public class Affichage implements Observateur {
     @Override
     public void actualiser() {
         this.cases = this.plateau.getCases();
-        //this.reset();//clear la console
+        Utils.resetTerminal();
         this.afficher();//affiche le nouveau plateau
     }
 
-    public void reset(){
-
-        String os = System.getProperty("os.name");
-        String command = os.contains("Windows") ? "cls" : "clear";
-
-        /*try{
-            Runtime.getRuntime().exec(command);
-        }
-        catch (Exception err){
-            System.out.println("Impossible de clear le terminal");
-        }*/
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
 
     //code pour affichage du plateau
     public void afficher(){
