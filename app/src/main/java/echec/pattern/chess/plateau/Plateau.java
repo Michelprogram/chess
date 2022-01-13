@@ -16,7 +16,6 @@ import java.util.*;
 public class Plateau implements Sujet {
 
     private List<Observateur> observateurs;
-    //private List<Piece> pieces;
     private Map<Case,Piece> cases;
 
     public Plateau(){
@@ -24,10 +23,6 @@ public class Plateau implements Sujet {
         //this.pieces = new ArrayList<>(32);//le plateau contient 32 pièces au début de la partie
         this.cases = new LinkedHashMap<>(64);//le plateau contient 64 cases
         this.initPlateau();
-
-        /*for(Piece p : cases.values()){
-            if(p!=null) pieces.add(p);
-        }*/
     }
 
     private void initPlateau() {
@@ -140,21 +135,21 @@ public class Plateau implements Sujet {
         ArrayList<ArrayList<Integer[]>> zoneDeplacement = piece.zoneDeDeplacement();
         ArrayList<ArrayList<Integer[]>> nouvelleZoneDeplacement = new ArrayList();//copie affinée de la liste de déplacement
 
-        //System.out.println("Cases possibles : ");
         for(ArrayList<Integer[]> ligne : zoneDeplacement){
             ArrayList<Integer[]> ligneCopie = new ArrayList<>();//copie de la ligne
             for(Integer[] coordonneCase : ligne){
-                //System.out.println(Arrays.toString(coordonneCase));
+
                 Case casePossible = this.getCase(coordonneCase);
                 if(casePossible!=null) {//si la case existe
                     if(cases.get(casePossible)!=null){//si la case possède une pièce
                         Piece p = cases.get(casePossible);//on récupère la pièce associée à la case
+
                         if((p.getCouleur() != piece.getCouleur()) && !(piece instanceof Pion)){//si la pièce est de l'équipe adverse && que je ne suis pas un pion
                             ligneCopie.add(coordonneCase);
                             casePossible.setComportementCase(new CaseEnDanger());
                             p.setMenace(true);//je peux la manger
                             break;
-                        }else{//si la pièce est de mon équipe
+                        }else{ //si la pièce est de mon équipe
                             break;//je m'arrête devant celle-ci et je ne l'ajoute pas à la liste des cases possibles
                         }
                     }else{//si la case est vide
@@ -224,7 +219,6 @@ public class Plateau implements Sujet {
                         piece.setPositionNumber(ancienneCase.getPosition());//on annule le déplacement
                         cases.replace(nouvelleCase, pieceMangee);
                         cases.replace(ancienneCase, piece);
-                        //this.reinitialiserCases(true);
                         System.out.print("Roi en échec !");
                         return false;//déplacement nok
                     }
@@ -264,7 +258,6 @@ public class Plateau implements Sujet {
                 }
 
                 if(roi.isMenace()){
-                    //System.out.println(Arrays.toString(p.getPositionNumber()));
                     return true;//le roi est en échec
                 }
             }
