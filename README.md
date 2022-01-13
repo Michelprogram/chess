@@ -21,12 +21,12 @@ Si vous voulez une meilleur vision du diagramme UML vous pouvez vous rendre à c
 
 Build le projet
 
-```
+```bash
 $bash : ./gradlew build -x test
 ```
 
 Exécution du projet
-```
+```bash
 $bash : java -jar app/build/libs/app.jar
 ```
 
