@@ -2,9 +2,6 @@ package echec.pattern.chess.piece.pieces;
 
 import echec.pattern.chess.piece.Piece;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 //Bishop
 //Déplacement diagonale sans limite
 public class Fou extends Piece {

@@ -13,7 +13,7 @@ public enum Couleur {
     ANSI_WHITE_BACKGROUND("\u001B[47m");
     private String value;
 
-    private Couleur(String value){
+    Couleur(String value){
         this.value = value;
     }
 

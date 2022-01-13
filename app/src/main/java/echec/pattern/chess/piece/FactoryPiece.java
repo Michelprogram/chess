@@ -96,7 +96,7 @@ public class FactoryPiece {
 
         Integer[] position = new Integer[2];
 
-        long occurrence = 0;
+        long occurrence;
 
         if(color) {
             occurrence = whitePieces.stream()

@@ -1,7 +1,7 @@
 package echec.pattern.chess.observer;
 
 public interface Sujet {
-    public void enregistrerObs(Observateur o);
-    public void supprimerObs(Observateur o);
-    public void notifierObs();
+    void enregistrerObs(Observateur o);
+    void supprimerObs(Observateur o);
+    void notifierObs();
 }

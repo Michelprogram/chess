@@ -1,9 +1,6 @@
 package echec.pattern.chess.piece.pieces;
 
-import echec.pattern.chess.piece.FactoryPiece;
 import echec.pattern.chess.piece.Piece;
-
-import java.util.ArrayList;
 
 //Queen
 //Déplacement partout sans limite

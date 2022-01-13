@@ -6,7 +6,6 @@ public class Case {
     private String couleur;
     private String nom;
     private Integer[] position;
-    private ComportementCase comportementCase;
 
     public Case(String nom, Integer[] position){
         this.nom = nom;
@@ -17,8 +16,7 @@ public class Case {
     }
 
     public void setComportementCase(ComportementCase comportementCase){
-        this.comportementCase = comportementCase;
-        this.couleur = this.comportementCase.setCouleur();
+        this.couleur = comportementCase.setCouleur();
     }
 
     public String getNom(){

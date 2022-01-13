@@ -16,7 +16,6 @@ public class Menu {
     private String choiceCase;
     private Scanner scanner;
     private Plateau plateau;
-    private Affichage affichage;
 
 
     public Menu(){
@@ -63,11 +62,11 @@ public class Menu {
         ArrayList<Joueur> joueurs = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
-        boolean deplacementIsOk = false;
+        boolean deplacementIsOk;
 
-        Case caseSource = null, caseDestination = null;
-        Piece pieceSelectionnee = null;
-        Joueur currentPlayer = null;
+        Case caseSource, caseDestination;
+        Piece pieceSelectionnee;
+        Joueur currentPlayer;
 
         int compteur = 0;
 
@@ -76,7 +75,7 @@ public class Menu {
         }
 
         Utils.resetTerminal();
-        this.affichage = new Affichage(plateau);
+        Affichage affichage = new Affichage(plateau);
 
 
         try{
@@ -181,7 +180,7 @@ public class Menu {
     }
 
     //Quitter l'application avec une attente de 5 secondes
-    public int quitter(){
+    public void quitter(){
 
         System.out.println("A bientôt sur 21 chess game.");
         for (int i = 0; i < 5; i++) {
@@ -190,11 +189,10 @@ public class Menu {
                 System.out.print(".");
             }catch(InterruptedException err){
                 System.out.println("Problème de fermeture : " + err.getMessage());
-                return -1;
+                return;
             }
             Utils.resetTerminal();
         }
-        return 0;
     }
 
     public static void main(String[] args) {

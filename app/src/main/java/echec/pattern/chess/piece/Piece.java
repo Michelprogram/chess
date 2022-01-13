@@ -3,7 +3,6 @@ package echec.pattern.chess.piece;
 import echec.pattern.chess.utils.Couleur;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public abstract class Piece {
@@ -56,7 +55,7 @@ public abstract class Piece {
 
         this.couleur = couleur;
         if(couleur) this.couleurCharacter = Couleur.ANSI_WHITE_BOLD_BRIGHT.getValue();
-        else if(!couleur) this.couleurCharacter = Couleur.ANSI_BLACK.getValue();
+        else this.couleurCharacter = Couleur.ANSI_BLACK.getValue();
 
         this.positionNumber = positionNumber;
         this.menace = false;

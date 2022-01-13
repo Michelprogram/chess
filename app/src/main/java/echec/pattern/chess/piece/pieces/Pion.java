@@ -2,7 +2,6 @@ package echec.pattern.chess.piece.pieces;
 
 import echec.pattern.chess.piece.Piece;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 

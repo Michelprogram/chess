@@ -257,7 +257,7 @@ public class Plateau implements Sujet {
                     this.filterDeplacement(p);
                 }
 
-                if(roi.isMenace()){
+                if(Objects.requireNonNull(roi).isMenace()){
                     return true;//le roi est en échec
                 }
             }
@@ -287,8 +287,7 @@ public class Plateau implements Sujet {
 
     @Override
     public void supprimerObs(Observateur o) {
-        if(this.observateurs.contains(o))
-            this.observateurs.remove(o);
+        this.observateurs.remove(o);
     }
 
     @Override

@@ -27,10 +27,6 @@ public class Affichage implements Observateur {
         this.afficher();
     }
 
-    public void setPlateau(Plateau plateau){
-        this.plateau = plateau;
-    }
-
     @Override
     public void actualiser() {
         this.cases = this.plateau.getCases();
