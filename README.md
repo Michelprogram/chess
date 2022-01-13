@@ -3,11 +3,12 @@
 Vous retrouverez les explications et les choix des différents designs pattern dans le fichier README.pdf <br>
 
 # Règles
-Dans ce jeux d'échecs 2 joueurs s'affronte au tour par tour.
-Les règles sont les mêmes que dans un jeux d'échecs classique.
-Plus d'info ici : https://ecole.apprendre-les-echecs.com/regles-echecs/
-Vous pouvez à tout moment arrêter le jeux en renseignant la lettre q.
-Si vous sélectionnez une mauvaise case renseigner la lettre c pour en choisir une autre.
+Dans ce jeux d'échecs 2 joueurs s'affronte au tour par tour.<br>
+Les règles sont les mêmes que dans un jeux d'échecs classique.<br>
+Plus d'info ici : https://ecole.apprendre-les-echecs.com/regles-echecs/ <br>
+Vous pouvez à tout moment arrêter le jeux en renseignant la lettre q.<br>
+Pour sélectionner une case syntaxe suivante, LettreChiffre exemple : a1. <br>
+Si vous sélectionnez une mauvaise case renseigner la lettre c pour en choisir une autre.<br>
 
 # Diagramme UML
 

@@ -12,7 +12,9 @@ import echec.pattern.chess.utils.Utils;
 
 import java.util.Map;
 
+//Affiche le tableau dans un terminal
 public class Affichage implements Observateur {
+
     private Map<Case, Piece> cases;
     private Plateau plateau;
 
@@ -21,7 +23,8 @@ public class Affichage implements Observateur {
         plateau.enregistrerObs(this);
         this.cases = plateau.getCases();
 
-        this.afficher();//affiche le jeu dès sa création
+        //affiche le jeu dès sa création
+        this.afficher();
     }
 
     public void setPlateau(Plateau plateau){

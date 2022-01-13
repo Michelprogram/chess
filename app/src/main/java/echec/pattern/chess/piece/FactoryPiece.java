@@ -3,6 +3,7 @@ package echec.pattern.chess.piece;
 import echec.pattern.chess.piece.pieces.*;
 import java.util.ArrayList;
 
+//Fabrique des pièces sur le plateau
 public class FactoryPiece {
 
     private final Boolean white;

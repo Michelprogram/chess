@@ -7,18 +7,35 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public abstract class Piece {
+
     //constantes déplacement (en partant de la case en haut à gauche -> (0;0))
     protected ArrayList<ArrayList<Integer[]>> DEPLACEMENT_LIGNE = new ArrayList(){{
-        add(new ArrayList<Integer[]>(){{for(int i=-1;i>=-7;i--){add(new Integer[]{i,0});}}});
-        add(new ArrayList<Integer[]>(){{for(int i=1;i<=7;i++){add(new Integer[]{0,i});}}});
-        add(new ArrayList<Integer[]>(){{for(int i=1;i<=7;i++){add(new Integer[]{i,0});}}});
-        add(new ArrayList<Integer[]>(){{for(int i=-1;i>=-7;i--){add(new Integer[]{0,i});}}});
+        add(new ArrayList<Integer[]>(){{
+            for(int i=-1;i>=-7;i--){add(new Integer[]{i,0});}
+        }});
+        add(new ArrayList<Integer[]>(){{
+            for(int i=1;i<=7;i++){add(new Integer[]{0,i});}
+        }});
+        add(new ArrayList<Integer[]>(){{
+            for(int i=1;i<=7;i++){add(new Integer[]{i,0});}
+        }});
+        add(new ArrayList<Integer[]>(){{
+            for(int i=-1;i>=-7;i--){add(new Integer[]{0,i});}
+        }});
     }};
     protected ArrayList<ArrayList<Integer[]>> DEPLACEMENT_CROIX = new ArrayList(){{
-        add(new ArrayList<Integer[]>(){{for(int i=-1;i>=-7;i--){add(new Integer[]{i,Math.abs(i)});}}});//ex : (-1;1)
-        add(new ArrayList<Integer[]>(){{for(int i=1;i<=7;i++){add(new Integer[]{i,i});}}});
-        add(new ArrayList<Integer[]>(){{for(int i=-1;i>=-7;i--){add(new Integer[]{Math.abs(i),i});}}});//ex : (1;-1)
-        add(new ArrayList<Integer[]>(){{for(int i=-1;i>=-7;i--){add(new Integer[]{i,i});}}});
+        add(new ArrayList<Integer[]>(){{
+            for(int i=-1;i>=-7;i--){add(new Integer[]{i,Math.abs(i)});}} //ex : (-1;1)
+        });
+        add(new ArrayList<Integer[]>(){{
+            for(int i=1;i<=7;i++){add(new Integer[]{i,i});}
+        }});
+        add(new ArrayList<Integer[]>(){{
+            for(int i=-1;i>=-7;i--){add(new Integer[]{Math.abs(i),i});} //ex : (1;-1)
+        }});
+        add(new ArrayList<Integer[]>(){{
+            for(int i=-1;i>=-7;i--){add(new Integer[]{i,i});}
+        }});
     }};
     //------------------------------------------------------------------------------
     protected char character;
@@ -26,12 +43,17 @@ public abstract class Piece {
     protected String positionLetter;
     protected Boolean couleur;
     protected String couleurCharacter;
-    protected Boolean menace;//maybe
-    protected ArrayList<ArrayList<Integer[]>> zone;//zone de déplacement de la piece (sans prendre en compte la position des autres pièces)
-    protected ArrayList<ArrayList<Integer[]>> zoneRecalculee;//zone de déplacement de la piece (tenant compte de la position des autres pièces)
+    protected Boolean menace;
+
+    //zone de déplacement de la piece (sans prendre en compte la position des autres pièces)
+    protected ArrayList<ArrayList<Integer[]>> zone;
+
+    //zone de déplacement de la piece (tenant compte de la position des autres pièces)
+    protected ArrayList<ArrayList<Integer[]>> zoneRecalculee;
 
 
     public Piece(Boolean couleur,Integer[] positionNumber) {
+
         this.couleur = couleur;
         if(couleur) this.couleurCharacter = Couleur.ANSI_WHITE_BOLD_BRIGHT.getValue();
         else if(!couleur) this.couleurCharacter = Couleur.ANSI_BLACK.getValue();

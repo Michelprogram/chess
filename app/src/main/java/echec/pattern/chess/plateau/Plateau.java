@@ -14,6 +14,7 @@ import echec.pattern.chess.utils.Convertisseur;
 import java.util.*;
 
 public class Plateau implements Sujet {
+
     private List<Observateur> observateurs;
     //private List<Piece> pieces;
     private Map<Case,Piece> cases;

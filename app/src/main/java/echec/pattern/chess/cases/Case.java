@@ -1,6 +1,8 @@
 package echec.pattern.chess.cases;
 
+//Définis une case du plateaux
 public class Case {
+
     private String couleur;
     private String nom;
     private Integer[] position;

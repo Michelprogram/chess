@@ -9,6 +9,7 @@ import echec.pattern.chess.utils.Utils;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//Classe menu qui gère l'intéraction avec les joueurs
 public class Menu {
 
     private String choiceMenu;
@@ -25,6 +26,7 @@ public class Menu {
         this.scanner = new Scanner(System.in);
     }
 
+    //Menu de début
     public void start(){
 
         System.out.println("----------- Bienvenue dans le jeux d'échecs 21 -----------");
@@ -54,6 +56,7 @@ public class Menu {
 
     }
 
+    //Fct qui tourne en boucle durant le temps de la partie
     public void game(){
 
 
@@ -137,6 +140,7 @@ public class Menu {
 
     }
 
+    //Crée deux joueurs qui s'affronte
     public Joueur creationJoueur(int idJoueur){
         String message = "Nom du " + (idJoueur == 0 ? "premier" : "second") + " joueur : ";
         String color = idJoueur == 0 ? "noir" : "blanc";
@@ -150,6 +154,7 @@ public class Menu {
         return new Joueur(choiceMenu, color, plateau);
     }
 
+    //Rappelle des règles
     public void regles(){
 
         System.out.println("--------- Règles ---------");
@@ -168,12 +173,14 @@ public class Menu {
 
     }
 
+    //Vérifie à chaque input possible si le joueur veut partir
     public void checkLeaveGame() throws ErrorLeaveGame {
         if (this.choiceCase.equals("q")){
             throw new ErrorLeaveGame("Fin de la partie");
         }
     }
 
+    //Quitter l'application avec une attente de 5 secondes
     public int quitter(){
 
         System.out.println("A bientôt sur 21 chess game.");
@@ -185,6 +192,7 @@ public class Menu {
                 System.out.println("Problème de fermeture : " + err.getMessage());
                 return -1;
             }
+            Utils.resetTerminal();
         }
         return 0;
     }

@@ -1,6 +1,8 @@
 package echec.pattern.chess.plateau;
 
+//Joueur de l'application
 public class Joueur {
+
     private String nom;
     private boolean couleur;
     private Plateau plateau;
